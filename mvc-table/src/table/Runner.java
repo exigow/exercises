@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 public class Runner {
 
     public static void main(String[] args) throws IOException {
-      new PeopleTable(Paths.get("data.dat"));
+      new PeopleTable(Paths.get("mvc-table/data.dat"));
     }
 
 }
