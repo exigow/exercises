@@ -1,1 +1,1 @@
-One exercise per module. The project was created using <b>IntelliJ IDEA</b>, but there should not be any problems with the import to other IDE's.
+Hello.
