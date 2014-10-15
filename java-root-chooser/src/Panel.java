@@ -2,8 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Panel extends JPanel implements ActionListener {
 
@@ -24,16 +26,22 @@ public class Panel extends JPanel implements ActionListener {
     add(new JScrollPane(logger), BorderLayout.CENTER);
   }
 
-  public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == button) {
+  public void actionPerformed(ActionEvent event) {
+    if (event.getSource() == button) {
       int val = fc.showDialog(this, "Pick root");
       switch (val) {
         case JFileChooser.APPROVE_OPTION: {
-          String root = fc.getCurrentDirectory().getAbsolutePath();
+          Path root = Paths.get("/home/exigo/CLion");
+          //Path root = fc.getCurrentDirectory().toPath();
           logLine("selected root: \"" + root + "\"");
-          Files.walkFileTree(f);
+          try {
+            Files.walkFileTree(root, new Visitor());
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
           break;
-        }        case JFileChooser.CANCEL_OPTION: {
+        }
+        case JFileChooser.CANCEL_OPTION: {
           logLine("cancelled");
           break;
         }
