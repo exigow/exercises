@@ -23,7 +23,7 @@ public class Runner {
         try {
           UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-          System.err.println("Can't set native look and feel.");
+          System.err.println("Can't set native look and feel");
           e.printStackTrace();
         }
         new Frame();

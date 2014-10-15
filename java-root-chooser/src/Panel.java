@@ -2,10 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Collection;
 
 public class Panel extends JPanel implements ActionListener {
 
@@ -28,29 +26,30 @@ public class Panel extends JPanel implements ActionListener {
 
   public void actionPerformed(ActionEvent event) {
     if (event.getSource() == button) {
-      int val = fc.showDialog(this, "Pick root");
+      logLine("opening dialog");
+      int val = fc.showDialog(this, "PICK ROOT");
       switch (val) {
         case JFileChooser.APPROVE_OPTION: {
-          Path root = Paths.get("/home/exigo/CLion");
-          //Path root = fc.getCurrentDirectory().toPath();
-          logLine("selected root: \"" + root + "\"");
-          try {
-            Files.walkFileTree(root, new Visitor());
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
+          Path root = fc.getCurrentDirectory().toPath();
+          logLine("selected root path: \"" + root + "\"\n\tfounded:");
+          logCollection(new TenBiggestFilesFinder().find(root));
           break;
         }
         case JFileChooser.CANCEL_OPTION: {
-          logLine("cancelled");
+          logLine("dialog cancelled");
           break;
         }
       }
     }
   }
 
+  private void logCollection(Collection collection) {
+    for (Object object : collection)
+      logLine(object.toString());
+  }
+
   private void logLine(String text) {
-    logger.append(text + "\n");
+    logger.append("# " + text + "\n");
     logger.setCaretPosition(logger.getDocument().getLength());
   }
 
