@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.nio.file.Path;
 import java.util.Collection;
 
-public class Panel extends JPanel implements ActionListener {
+class Panel extends JPanel implements ActionListener {
 
   private final JFileChooser fc = new JFileChooser() {{
     setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);

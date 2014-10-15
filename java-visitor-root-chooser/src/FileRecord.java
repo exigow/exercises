@@ -1,10 +1,10 @@
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 
-public class FileRecord {
+class FileRecord {
 
-  Path path;
-  BasicFileAttributes attributes;
+  private final Path path;
+  final BasicFileAttributes attributes;
 
   public FileRecord(Path path, BasicFileAttributes attributes) {
     this.path = path;

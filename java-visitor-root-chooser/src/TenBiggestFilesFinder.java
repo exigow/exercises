@@ -7,7 +7,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class TenBiggestFilesFinder extends SimpleFileVisitor<Path> {
+class TenBiggestFilesFinder extends SimpleFileVisitor<Path> {
 
   private final static int MAX_ELEMENTS = 10;
   private final Collection<FileRecord> records = new ArrayList<FileRecord>();
