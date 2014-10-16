@@ -4,13 +4,25 @@ import java.util.Collection;
 
 public class Runner {
 
-  private final static String serializationFile = "java-loader-serializer/persons.jobj";
+  private final static String
+    serializationFile = "java-loader-serializer/persons.jobj",
+    datFile = "java-loader-serializer/persons.dat",
+    datBackupFile = "java-loader-serializer/persons_bak.dat";
 
   public static void main(String[] args) throws IOException, ClassNotFoundException {
-    Collection<Person> persons = Loader.load(Paths.get("java-loader-serializer/persons.dat"));
-    Serializer.serialize(persons, serializationFile);
+    // load from dat
+    Collection<Person> personsLoaded = Loader.load(Paths.get(datFile));
+    System.out.println("loaded: " + personsLoaded);
+
+    // serialize to jobj
+    Serializer.serialize(personsLoaded, serializationFile);
+
+    // deserialize from jobj
     Collection<Person> personsDeserialized = (Collection<Person>)Serializer.deserialize(serializationFile);
-    System.out.println(personsDeserialized);
+    System.out.println("deserialized: " + personsDeserialized);
+
+    // write backup
+    Loader.save(personsDeserialized, datBackupFile);
   }
 
 }

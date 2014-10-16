@@ -1,7 +1,10 @@
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Person implements Serializable {
+
+  public final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
   public String name, lastName, phone;
   public Date date;
@@ -9,12 +12,7 @@ public class Person implements Serializable {
   // generated
   @Override
   public String toString() {
-    return "Person{" +
-      "name='" + name + '\'' +
-      ", lastName='" + lastName + '\'' +
-      ", phone='" + phone + '\'' +
-      ", date=" + date +
-      '}';
+    return name + ":" + lastName + ":" + DATE_FORMAT.format(date) + ":" + phone;
   }
 
 }
