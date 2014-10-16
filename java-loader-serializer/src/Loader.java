@@ -1,4 +1,7 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -6,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class Loader {
@@ -28,6 +32,13 @@ public class Loader {
         }});
       }
     }};
+  }
+
+  public static void serializeTo(Collection<Person> persons, String path) throws IOException {
+    FileOutputStream fileOutputStream = new FileOutputStream(path);
+    ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+    objectOutputStream.writeObject(persons);
+    objectOutputStream.close();
   }
 
   private static String[] getWords(String line) {
