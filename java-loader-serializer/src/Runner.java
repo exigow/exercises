@@ -4,9 +4,13 @@ import java.util.Collection;
 
 public class Runner {
 
-  public static void main(String[] args) throws IOException {
+  private final static String serializationFile = "java-loader-serializer/persons.jobj";
+
+  public static void main(String[] args) throws IOException, ClassNotFoundException {
     Collection<Person> persons = Loader.load(Paths.get("java-loader-serializer/persons.dat"));
-    Loader.serializeTo(persons, "java-loader-serializer/persons.jobj");
+    Serializer.serialize(persons, serializationFile);
+    Collection<Person> personsDeserialized = (Collection<Person>)Serializer.deserialize(serializationFile);
+    System.out.println(personsDeserialized);
   }
 
 }
