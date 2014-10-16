@@ -6,7 +6,7 @@ public class Runner {
     byte[] bytes = BinaryReader.read("java-binary-reader/test.bin");
     /*for (byte b : bytes)
       System.out.println(b);*/
-    System.out.println(new String(bytes));
+    System.out.println(new String(bytes, "UTF-8"));
   }
 
 }
