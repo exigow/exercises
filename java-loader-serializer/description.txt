@@ -1,0 +1,13 @@
+Zadanie 1.3   Napisz program wczytujący plik tekstowy persons.dat zawierający informacje
+o osobach: każda linia opisuje jedną osobę i ma format
+        imię:nazwisko:data_urodzenia:telefon
+na przykład
+        ...
+        Robert:Gaj:1990-06-21:+48 508 233 104
+        Kasia:Tarska:1995-12-09:+48 507 309 344
+        ...
+Program tworzy na tej podstawie listę —  ArrayList<Person> — (odniesień do)
+obiektów własnej klasy Person, a następnie zapisuje ją jako jeden obiekt do
+binarnego pliku persons.jobj. Ten sam (lub inny) program odczytuje utworzony plik
+i zapisuje uzyskane informacje do nowego pliku tekstowego persons_bak.dat
+(który zatem powinien być w zasadzie identyczny z wyjściowym plikiem persons.dat).
