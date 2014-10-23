@@ -4,9 +4,13 @@ public class Runner {
 
   public static void main(String[] args) throws IOException {
     byte[] bytes = BinaryReader.read("java-binary-reader/test.bin");
-    /*for (byte b : bytes)
-      System.out.println(b);*/
-    System.out.println(new String(bytes, "UTF-8"));
+    String dirty = new BytesToUtfProcessor().getString(bytes);
+    System.out.println(clearString(dirty));
   }
+
+  private static String clearString(String source) {
+    return source.replaceAll("\\W*", "");
+  }
+
 
 }
