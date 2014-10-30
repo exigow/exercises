@@ -1,0 +1,25 @@
+### IN POLISH ###
+
+Zadanie 1.5
+Ściągnij listę angielskich słów z pliku znajdującego się na moim „ftp-ie"
+english_words_LIN.txt lub english_words_WIN.txt (różnią się tylko kodowaniem końca linii).
+
+Następnie:
+
+- napisz program (dla miłośników krzyżówek),
+który czyta z klawiatury pewien wzór słowa i wyszukuje z listy
+wszystkie słowa pasujące do tego wzoru. Wzorem jest słowo w
+którym każda litera oznacza sama siebie, a znak kropki oznacza „dowolna litera”;
+
+- napisz program, który wypisuje występujące na liście anagramy słowa
+podanego przez użytkownika z klawiatury;
+
+- napisz program, który wypisuje anagramy słów z listy w kolejności
+ilości anagramów; na przykład jedna linia wydruku mogłaby mieć postać
+           2: [dog god]
+
+Oczywiście każde słowo może pojawić się tylko w jednej takiej linii.
+Wydruk powinien uwzględniać tylko przypadki, kiedy liczba anagramów wynosi
+co najmniej trzy (w przeciwnym przypadku byłby zbyt długi...).
+Użyj odpowiednich kolekcji (na przykład Map<String,List<MyClass>> lub podobnych.
+[Anagram to słowo powstające z danego przez permutację liter.]
