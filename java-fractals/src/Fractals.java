@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Fractals extends JFrame {
 
-  private final static Dimension WINDOW_SIZE = new Dimension(640, 480);
+  private final static Dimension WINDOW_SIZE = new Dimension(1024, 640);
   private BufferedImage generated;
 
   public Fractals() {
@@ -18,7 +18,7 @@ public class Fractals extends JFrame {
 
   private BufferedImage generate(int width, int height) {
     BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    float cx = .5f, cy = .5f;
+    float cx = -.70176f, cy = -.3842f;
     for (int ix = 0; ix < width; ix++)
       for (int iy = 0; iy < height; iy++) {
         float
@@ -34,7 +34,8 @@ public class Fractals extends JFrame {
           zx = x;
           zy = y;
         }
-        result.setRGB(ix, iy, generateRgb((float) i / 16f, 0f, 0f));
+        float val = (float) i / 16f;
+        result.setRGB(ix, iy, generateRgb(val, 0f, 0f));
       }
     return result;
   }
