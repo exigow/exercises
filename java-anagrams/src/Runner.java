@@ -17,7 +17,7 @@ public class Runner {
     /*for (String line : Anagramer.search("enoz", lines))
       System.out.println(line);*/
 
-    new Anagrams().build(lines);
+    new AnagramCollector().build(lines);
   }
 
 }

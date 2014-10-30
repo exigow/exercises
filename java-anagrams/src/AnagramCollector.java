@@ -2,7 +2,7 @@ import com.sun.istack.internal.NotNull;
 
 import java.util.*;
 
-public class Anagrams {
+public class AnagramCollector {
 
   public void build(final Collection<String> source) {
     List<Pair> pairs = buildPairs(source);
