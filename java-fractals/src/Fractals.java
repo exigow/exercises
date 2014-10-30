@@ -22,8 +22,8 @@ public class Fractals extends JFrame {
     for (int ix = 0; ix < width; ix++)
       for (int iy = 0; iy < height; iy++) {
         float
-          zx = ((float) ix / width - .5f) * 4f,
-          zy = ((float) iy / height - .5f) * 4f;
+          zx = ((float) ix / width - .5f) * 2f,
+          zy = ((float) iy / height - .5f) * 2f;
         int i = 0;
         for (; i < 512; i++) {
           float
@@ -35,7 +35,7 @@ public class Fractals extends JFrame {
           zy = y;
         }
         float val = (float) i / 16f;
-        result.setRGB(ix, iy, generateRgb(val, 0f, 0f));
+        result.setRGB(ix, iy, generateRgb((float) Math.cos(val * Math.PI), (float) Math.sin(val * Math.PI), .5f));
       }
     return result;
   }
