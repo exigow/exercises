@@ -2,15 +2,15 @@ package anagrams;
 
 public class Pair implements Comparable<Pair> {
 
-  public String left, right;
+  public String key, original;
 
   @Override
   public int compareTo(Pair o) {
-    return o.left.compareTo(left);
+    return o.key.compareTo(key);
   }
 
   public String toString() {
-    return left + " -> " + right;
+    return key + " -> " + original;
   }
 
 }

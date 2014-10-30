@@ -7,15 +7,15 @@ public class AnagramCollector {
   public static List<String[]> build(final Collection<String> source) {
     Collection<String[]> anagrams = new ArrayList<String[]>();
     List<Pair> pairs = buildPairs(source);
-    String prev = pairs.get(0).left;
+    String prev = pairs.get(0).key;
     Collection<String> temp = new ArrayList<String>();
     for (Pair pair : pairs) {
-      if (!prev.equals(pair.left)) {
+      if (!prev.equals(pair.key)) {
         anagrams.add(temp.toArray(new String[temp.size()]));
         temp.clear();
       }
-      prev = pair.left;
-      temp.add(pair.right);
+      prev = pair.key;
+      temp.add(pair.original);
     }
     return (List<String[]>) anagrams;
   }
@@ -24,8 +24,8 @@ public class AnagramCollector {
     List<Pair> pairs =  new ArrayList<Pair>() {{
       for (final String str : source)
         add(new Pair() {{
-          left = sortWord(str);
-          right = str;
+          key = sortWord(str);
+          original = str;
         }});
     }};
     Collections.sort(pairs);
