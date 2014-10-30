@@ -2,12 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Fractals extends JFrame {
+public class JuliaFractal extends JFrame {
 
   private final static Dimension WINDOW_SIZE = new Dimension(1024, 640);
   private BufferedImage generated;
 
-  public Fractals() {
+  public JuliaFractal() {
     super("fractals");
     setSize(WINDOW_SIZE);
     setLocationRelativeTo(null);
