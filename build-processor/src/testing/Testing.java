@@ -12,11 +12,11 @@ public class Testing {
   private final static String TEMP_COMPILED = "_temp";
 
   public static void main(String[] args) throws IOException, InterruptedException {
-    Process compiler = Compile.execute("main.c", TEMP_COMPILED);
+    Process compiler = new Compile("main.c", TEMP_COMPILED).exec();
     Product product = Executor.execute(compiler);
     System.out.println("[compilation]\n" + product.toString());
 
-    Process instance = Run.run(TEMP_COMPILED);
+    Process instance = new Run(TEMP_COMPILED).exec();
     Product test = Executor.executeWithStream(instance, new FileInputStream("./cpp/code/train/binary.in"));
     System.out.println("[testing]\n" + test.toString());
 
