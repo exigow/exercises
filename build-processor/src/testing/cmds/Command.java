@@ -5,11 +5,11 @@ import java.io.IOException;
 
 public abstract class Command {
 
-  public Process exec() throws IOException {
-    return  buildProcess(generateArgs());
-  }
-
   protected abstract String[] generateArgs();
+
+  public Process run() throws IOException {
+    return buildProcess(generateArgs());
+  }
 
   private Process buildProcess(String[] args) throws IOException {
     ProcessBuilder pb = new ProcessBuilder(args);
