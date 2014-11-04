@@ -17,7 +17,7 @@ public class Testing {
     System.out.println("[compilation]\n" + product.toString());
 
     Process instance = new Run(TEMP_COMPILED).exec();
-    Product test = Executor.executeWithStream(instance, new FileInputStream("./cpp/code/train/binary.in"));
+    Product test = Executor.executeWithStream(instance, new FileInputStream("./build-processor/code/train/binary.in"));
     System.out.println("[testing]\n" + test.toString());
 
     Process remover = new Remove(TEMP_COMPILED).exec();

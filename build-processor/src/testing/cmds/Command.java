@@ -13,7 +13,7 @@ public abstract class Command {
 
   private Process buildProcess(String[] args) throws IOException {
     ProcessBuilder pb = new ProcessBuilder(args);
-    pb.directory(new File("./cpp/code/train"));
+    pb.directory(new File("./build-processor/code/train"));
     pb.redirectErrorStream(true);
     return pb.start();
   }
