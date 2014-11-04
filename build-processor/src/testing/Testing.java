@@ -1,10 +1,6 @@
 package testing;
-import testing.cmds.shell.Compile;
-import testing.cmds.Product;
-import testing.cmds.shell.Remove;
-import testing.cmds.shell.Run;
+import testing.tests.TestFinder;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
