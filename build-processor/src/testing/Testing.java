@@ -1,33 +1,39 @@
 package testing;
-import testing.tests.Test;
+
+import testing.cmds.Product;
+import testing.cmds.shell.Compilator;
+import testing.cmds.shell.Remover;
+import testing.cmds.shell.Runer;
 import testing.tests.TestFinder;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
+import java.util.Set;
 
 public class Testing {
 
   private final static String TEMP_COMPILED = "_temp";
+  private final static String WORKING_PATH = "build-processor/code/";
 
   public static void main(String[] args) throws IOException, InterruptedException {
-    Path root = Paths.get("build-processor/code");
-    Collection<Test> tests = new TestFinder().collect(root);
-    for (Test test : tests)
+    Path root = Paths.get(WORKING_PATH);
+    Set<String> tests = new TestFinder().collect(root);
+    for (String test : tests)
       System.out.println(test);
 
-    /*Process compiler = new Compile("main.c", TEMP_COMPILED).run();
+    Process compiler = new Compilator("main.c", TEMP_COMPILED).run();
     Product product = Executor.execute(compiler);
     System.out.println("[compilation]\n" + product.toString());
 
-    Process instance = new Run(TEMP_COMPILED).run();
-    Product test = Executor.executeWithStream(instance, new FileInputStream("./build-processor/code/train/binary.in"));
+    Process instance = new Runer(TEMP_COMPILED).run();
+    Product test = Executor.executeWithStream(instance, new FileInputStream("./" + WORKING_PATH + "train/binary.in"));
     System.out.println("[testing]\n" + test.toString());
 
-    Process remover = new Remove(TEMP_COMPILED).run();
+    Process remover = new Remover(TEMP_COMPILED).run();
     Product rem = Executor.execute(remover);
-    System.out.println("[removing]\n" + rem.toString());*/
+    System.out.println("[removing]\n" + rem.toString());
   }
 
 }

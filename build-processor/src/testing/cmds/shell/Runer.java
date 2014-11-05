@@ -5,11 +5,11 @@ import testing.cmds.Command;
 import java.io.File;
 import java.io.IOException;
 
-public class Run extends Command {
+public class Runer extends Command {
 
   private final String executableName;
 
-  public Run(String executableName) {
+  public Runer(String executableName) {
     this.executableName = executableName;
   }
 

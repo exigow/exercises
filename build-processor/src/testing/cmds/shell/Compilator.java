@@ -2,11 +2,11 @@ package testing.cmds.shell;
 
 import testing.cmds.Command;
 
-public class Compile extends Command {
+public class Compilator extends Command {
 
   private final String sourceName, compiledName;
 
-  public Compile(String sourceName, String compiledName) {
+  public Compilator(String sourceName, String compiledName) {
     this.sourceName = sourceName;
     this.compiledName = compiledName;
   }

@@ -11,54 +11,31 @@ import java.util.*;
 
 public class TestFinder {
 
-  public Collection<Test> collect(Path root) {
+  public Set<String> collect(Path root) {
     final Finder finder = new Finder();
     try {
       Files.walkFileTree(root, finder);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    /*finder.sort();
-    Collection<Test> tests = new ArrayList<Test>() {{
-      for (final File file : finder.input)
-        add(new Test() {{
-          input = file;
-        }});
+    return new TreeSet<String>() {{
+      for (File file : finder.files)
+        add(extractName(file.getName()));
     }};
-    for (Test test : tests) {
-      String name = extractName(test.input.getName());
-      for ()
-    }
-    return tests;*/
-    return null;
-
-
-
-    // TODO  treeset? i wywalanie samuych nazw?
   }
 
   private static class Finder extends SimpleFileVisitor<Path> {
 
     final Collection<File>
-      input = new ArrayList<File>(),
-      output = new ArrayList<File>();
+      files = new ArrayList<File>();
 
     @Override
     public FileVisitResult visitFile(Path path, BasicFileAttributes attributes) {
       File visited = path.toFile();
       String extension = extractExtension(visited.getName());
-      if (isTest(extension)) {
-        if (extension.equals("in"))
-          input.add(visited);
-        if (extension.equals("out"))
-          output.add(visited);
-      }
+      if (isTest(extension))
+        files.add(visited);
       return FileVisitResult.CONTINUE;
-    }
-
-    public void sort() {
-      Collections.sort((List<File>) input);
-      Collections.sort((List<File>) output);
     }
 
   }

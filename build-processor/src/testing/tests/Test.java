@@ -9,7 +9,7 @@ public class Test {
   @Override
   public String toString() {
     return "Test{" +
-      "input=" + input +
+      "files=" + input +
       ", output=" + output +
       '}';
   }

@@ -2,11 +2,11 @@ package testing.cmds.shell;
 
 import testing.cmds.Command;
 
-public class Remove extends Command {
+public class Remover extends Command {
 
   private final String filename;
 
-  public Remove(String filename) {
+  public Remover(String filename) {
     this.filename = filename;
   }
 
