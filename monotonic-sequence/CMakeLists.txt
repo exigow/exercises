@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8.4)
+project(monotonic_sequence)
+set(SOURCE_FILES main.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/home/exigo/projects/exercises/monotonic-sequence/")
+add_executable(exe ${SOURCE_FILES})
