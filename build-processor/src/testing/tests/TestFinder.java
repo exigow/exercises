@@ -11,17 +11,23 @@ import java.util.*;
 
 public class TestFinder {
 
-  public Set<String> collect(Path root) {
+  public Set<Test> collect(Path root) {
     final Finder finder = new Finder();
     try {
       Files.walkFileTree(root, finder);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return new TreeSet<String>() {{
+    Set<String> testNames = new TreeSet<String>() {{
       for (File file : finder.files)
         add(extractName(file.getName()));
     }};
+    return buildTests(testNames, root);
+  }
+
+  private Set<Test> buildTests(Set<String> names, Path root) {
+
+    return null;
   }
 
   private static class Finder extends SimpleFileVisitor<Path> {

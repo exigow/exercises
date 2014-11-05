@@ -8,9 +8,7 @@ import testing.tests.TestFinder;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Set;
 
 public class Testing {
 
@@ -18,10 +16,9 @@ public class Testing {
   private final static String WORKING_PATH = "build-processor/code/";
 
   public static void main(String[] args) throws IOException, InterruptedException {
-    Path root = Paths.get(WORKING_PATH);
-    Set<String> tests = new TestFinder().collect(root);
-    for (String test : tests)
-      System.out.println(test);
+    /*Set<String> testNames = */new TestFinder().collect(Paths.get(WORKING_PATH));
+    /*for (String test : testNames)
+      System.out.println(test);*/
 
     Process compiler = new Compilator("main.c", TEMP_COMPILED).run();
     Product product = Executor.execute(compiler);
