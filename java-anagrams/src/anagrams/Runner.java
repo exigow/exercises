@@ -23,7 +23,7 @@ public class Runner {
   private static void prettyPrint(Collection<? extends Object[]> anagrams) {
     for (Object[] str : anagrams) {
       if (str.length > 1)
-        System.out.println(Arrays.toString(str));
+        System.out.println(str.length + ": " + Arrays.toString(str));
     }
   }
 
