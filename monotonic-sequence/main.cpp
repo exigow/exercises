@@ -28,7 +28,7 @@ void print_series(Series s) {
 
 int main() {
   int value,
-    prev = 0;
+    prev = 16;
   Side decreasing = Side();
   while (true) {
     printf("---\n");
@@ -41,6 +41,9 @@ int main() {
       decreasing.actual.counter++;
       if (decreasing.actual.counter >= decreasing.maximum.counter)
         decreasing.maximum = decreasing.actual;
+    } else {
+      decreasing.actual.sum = value;
+      decreasing.actual.counter = 1;
     }
     print_series(decreasing.actual);
   }
