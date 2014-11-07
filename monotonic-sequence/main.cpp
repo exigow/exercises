@@ -23,19 +23,19 @@ public:
   Series temp,
     max;
 
-  void add(int value) {
+  inline void add(int value) {
     temp.sum += value;
     temp.counter++;
     if (temp.counter >= max.counter)
       max = temp;
   }
 
-  void reset(int value) {
+  inline void reset(int value) {
     temp.sum = value;
     temp.counter = 1;
   }
 
-  void print() {
+  inline void print() {
     printf("temp{counter: %d, sum: %d} max{counter: %d, sum: %d}\n", temp.counter, temp.sum, max.counter, max.sum);
   }
 
@@ -44,6 +44,10 @@ public:
 int main() {
   int value = next(),
     prev = value;
+  if (value == -1) {
+    printf("0 0");
+    return 0;
+  }
   Side decreasing = Side(), increasing = Side();
   do {
     if (value <= prev)
