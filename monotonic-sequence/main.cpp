@@ -1,13 +1,13 @@
 #include <stdio.h>
 
 inline long next() {
-  long n = 0;
-  int c = getchar_unlocked();
+  register long n = 0;
+  register int c = getchar_unlocked();
   if (c == -1)
     return -1;
-  while (c >= 48 && c <= 57)
-    n = n * 10 + c - 48,
-    c = getchar_unlocked();
+  while (c > 47 && c < 58)
+    n = (n << 1) + (n << 3) + c - 48,
+      c = getchar_unlocked();
   return n;
 }
 
