@@ -14,7 +14,7 @@ inline long next() {
 class Side {
 public:
   struct Series {
-    int counter;
+    long counter;
     long sum;
   };
   Series temp,
@@ -22,7 +22,7 @@ public:
   inline void add(long value) {
     temp.sum += value;
     temp.counter++;
-    if (temp.counter >= max.counter)
+    if (temp.counter > max.counter)
       max = temp;
   }
   inline void reset(long value) {
@@ -30,7 +30,7 @@ public:
     temp.counter = 1;
   }
   inline static void print(Side side) {
-    printf("%d %lu", side.max.counter, side.max.sum);
+    printf("%lu %lu", side.max.counter, side.max.sum);
   }
 };
 
