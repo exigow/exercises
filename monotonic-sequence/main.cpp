@@ -8,7 +8,7 @@ inline int next() {
   while (c >= 48 && c <= 57)
     n = n * 10 + c - 48,
       c = getchar_unlocked();
-  printf("next is %d\n", n);
+  printf("value: %d\n", n);
   return n;
 }
 
@@ -18,37 +18,40 @@ struct Series {
 };
 
 struct Side {
-  Series actual,
-    maximum;
+  Series temp,
+    max;
 };
 
-void print_series(Series s) {
-  printf("series: counter: %d, sum: %d\n", s.counter, s.sum);
+void add_series(Series * s, int val) {
+  s->sum += val;
+  s->counter++;
+}
+
+
+void start_series(Series * s, int val) {
+  s->sum = val;
+  s->counter = 0;
+}
+
+void print_side(Side s) {
+  printf("temp{counter: %d, sum: %d} max{counter: %d, sum: %d}\n", s.temp.sum, s.temp.counter, s.max.sum, s.max.counter);
 }
 
 int main() {
-  int value,
-    prev = 16;
+  int value = next(),
+    prev = value;
   Side decreasing = Side();
-  while (true) {
-    printf("---\n");
-    value = next();
-    if (value == -1)
-      break;
+  do {
     if (value <= prev) {
       prev = value;
-      decreasing.actual.sum += value;
-      decreasing.actual.counter++;
-      if (decreasing.actual.counter >= decreasing.maximum.counter)
-        decreasing.maximum = decreasing.actual;
-    } else {
-      decreasing.actual.sum = value;
-      decreasing.actual.counter = 1;
-    }
-    print_series(decreasing.actual);
-  }
-  printf("maximum ");
-  print_series(decreasing.maximum);
+      add_series(&decreasing.temp, value);
+      if (decreasing.temp.counter >= decreasing.max.counter)
+        decreasing.max = decreasing.temp;
+    } else
+      start_series(&decreasing.temp, value);
+    print_side(decreasing);
+    value = next();
+  } while (value != -1);
   return 0;
 }
 
