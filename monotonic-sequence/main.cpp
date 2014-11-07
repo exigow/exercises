@@ -17,6 +17,11 @@ struct Series {
     sum;
 };
 
+struct Side {
+  Series actual,
+    maximum;
+};
+
 void print_series(Series s) {
   printf("series: counter: %d, sum: %d\n", s.counter, s.sum);
 }
@@ -24,31 +29,23 @@ void print_series(Series s) {
 int main() {
   int value,
     prev = 0;
-  Series actual = Series(),
-    maximum = Series();
+  Side decreasing = Side();
   while (true) {
+    printf("---\n");
     value = next();
     if (value == -1)
       break;
-    if (value >= prev) {
-      printf("value %d is bigger or equal than %d\n", value, prev);
+    if (value <= prev) {
       prev = value;
-      actual.sum += value;
-      actual.counter++;
-      if (actual.counter >= maximum.counter) {
-        maximum = actual;
-        printf("updating max\n");
-      }
-      printf("actual ");
-      print_series(actual);
+      decreasing.actual.sum += value;
+      decreasing.actual.counter++;
+      if (decreasing.actual.counter >= decreasing.maximum.counter)
+        decreasing.maximum = decreasing.actual;
     }
-    else {
-      actual.counter = 1;
-      actual.sum = value;
-    }
+    print_series(decreasing.actual);
   }
   printf("maximum ");
-  print_series(maximum);
+  print_series(decreasing.maximum);
   return 0;
 }
 
