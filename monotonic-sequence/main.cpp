@@ -12,47 +12,46 @@ inline int next() {
   return n;
 }
 
-struct Series {
-  int counter,
-    sum;
-};
+class Side {
+public:
 
-struct Side {
+  struct Series {
+    int counter,
+      sum;
+  };
+
   Series temp,
     max;
+
+  void add(int value) {
+    temp.sum += value;
+    temp.counter++;
+    if (temp.counter >= max.counter)
+      max = temp;
+  }
+
+  void reset(int value) {
+    temp.sum = value;
+    temp.counter = 0;
+  }
+
+  void print() {
+    printf("temp{counter: %d, sum: %d} max{counter: %d, sum: %d}\n", temp.sum, temp.counter, max.sum, max.counter);
+  }
+
 };
-
-void add_series(Series * s, int val) {
-  s->sum += val;
-  s->counter++;
-}
-
-
-void start_series(Series * s, int val) {
-  s->sum = val;
-  s->counter = 0;
-}
-
-void print_side(Side s) {
-  printf("temp{counter: %d, sum: %d} max{counter: %d, sum: %d}\n", s.temp.sum, s.temp.counter, s.max.sum, s.max.counter);
-}
 
 int main() {
   int value = next(),
     prev = value;
   Side decreasing = Side();
   do {
-    if (value <= prev) {
-      prev = value;
-      add_series(&decreasing.temp, value);
-      if (decreasing.temp.counter >= decreasing.max.counter)
-        decreasing.max = decreasing.temp;
-    } else
-      start_series(&decreasing.temp, value);
-    print_side(decreasing);
+    if (value <= prev)
+      decreasing.add(value), prev = value;
+    else
+      decreasing.reset(value);
+    decreasing.print();
     value = next();
   } while (value != -1);
   return 0;
 }
-
-
