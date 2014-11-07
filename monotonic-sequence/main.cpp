@@ -35,16 +35,20 @@ int main() {
       prev = value;
       actual.sum += value;
       actual.counter++;
+      if (actual.counter >= maximum.counter) {
+        maximum = actual;
+        printf("updating max\n");
+      }
+      printf("actual ");
       print_series(actual);
     }
     else {
-      /*if (actual.counter >= maximum.counter)
-        maximum = actual;
       actual.counter = 1;
-      actual.sum = value;*/
+      actual.sum = value;
     }
   }
-  print_series(actual);
+  printf("maximum ");
+  print_series(maximum);
   return 0;
 }
 
