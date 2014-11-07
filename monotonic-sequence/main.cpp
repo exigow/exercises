@@ -1,41 +1,41 @@
 #include <stdio.h>
 
-inline int next() {
-  int n = 0;
+inline long next() {
+  long n = 0;
   int c = getchar_unlocked();
   if (c == -1)
     return -1;
   while (c >= 48 && c <= 57)
     n = n * 10 + c - 48,
-      c = getchar_unlocked();
+    c = getchar_unlocked();
   return n;
 }
 
 class Side {
 public:
   struct Series {
-    int counter,
-      sum;
+    int counter;
+    long sum;
   };
   Series temp,
     max;
-  inline void add(int value) {
+  inline void add(long value) {
     temp.sum += value;
     temp.counter++;
     if (temp.counter >= max.counter)
       max = temp;
   }
-  inline void reset(int value) {
+  inline void reset(long value) {
     temp.sum = value;
     temp.counter = 1;
   }
   inline static void print(Side side) {
-    printf("%d %d", side.max.counter, side.max.sum);
+    printf("%d %lu", side.max.counter, side.max.sum);
   }
 };
 
 int main() {
-  int value = next(),
+  long value = next(),
     prev = value;
   if (value == -1) {
     printf("0 0");
