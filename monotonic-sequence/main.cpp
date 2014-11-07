@@ -8,37 +8,30 @@ inline int next() {
   while (c >= 48 && c <= 57)
     n = n * 10 + c - 48,
       c = getchar_unlocked();
-  printf("value: %d\n", n);
   return n;
 }
 
 class Side {
 public:
-
   struct Series {
     int counter,
       sum;
   };
-
   Series temp,
     max;
-
   inline void add(int value) {
     temp.sum += value;
     temp.counter++;
     if (temp.counter >= max.counter)
       max = temp;
   }
-
   inline void reset(int value) {
     temp.sum = value;
     temp.counter = 1;
   }
-
-  inline void print() {
-    printf("temp{counter: %d, sum: %d} max{counter: %d, sum: %d}\n", temp.counter, temp.sum, max.counter, max.sum);
+  inline static void print(Side side) {
+    printf("%d %d", side.max.counter, side.max.sum);
   }
-
 };
 
 int main() {
@@ -58,10 +51,12 @@ int main() {
       increasing.add(value);
     else
       increasing.reset(value);
-    decreasing.print();
-    increasing.print();
     prev = value;
     value = next();
   } while (value != -1);
+  if (increasing.max.counter <= decreasing.max.counter)
+    Side::print(decreasing);
+  else
+    Side::print(increasing);
   return 0;
 }
