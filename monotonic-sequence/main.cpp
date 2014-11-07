@@ -32,11 +32,11 @@ public:
 
   void reset(int value) {
     temp.sum = value;
-    temp.counter = 0;
+    temp.counter = 1;
   }
 
   void print() {
-    printf("temp{counter: %d, sum: %d} max{counter: %d, sum: %d}\n", temp.sum, temp.counter, max.sum, max.counter);
+    printf("temp{counter: %d, sum: %d} max{counter: %d, sum: %d}\n", temp.counter, temp.sum, max.counter, max.sum);
   }
 
 };
@@ -44,13 +44,19 @@ public:
 int main() {
   int value = next(),
     prev = value;
-  Side decreasing = Side();
+  Side decreasing = Side(), increasing = Side();
   do {
     if (value <= prev)
-      decreasing.add(value), prev = value;
+      decreasing.add(value);
     else
       decreasing.reset(value);
+    if (value >= prev)
+      increasing.add(value);
+    else
+      increasing.reset(value);
     decreasing.print();
+    increasing.print();
+    prev = value;
     value = next();
   } while (value != -1);
   return 0;
