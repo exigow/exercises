@@ -1,3 +1,5 @@
+package phones;
+
 public class Record {
 
   public static Record generate() {
@@ -12,7 +14,7 @@ public class Record {
     return (int) (Math.random() * max);
   }
 
-  public int[] field = new int[3];
+  public final int[] field = new int[3];
 
   public String printRecord() {
     return field[0] + " " + field[1] + " " + field[2];
