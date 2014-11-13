@@ -18,8 +18,8 @@ public class Record {
     return call + " " + rec + " " + length;
   }
 
-  public static Record loadRecord(String input) {
-    final String[] values = input.split(" ");
+  public static Record parseRecord(String line) {
+    final String[] values = line.split(" ");
     return new Record() {{
       call = (Integer.parseInt(values[0]));
       rec = (Integer.parseInt(values[1]));
