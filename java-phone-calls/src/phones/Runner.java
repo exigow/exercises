@@ -13,7 +13,7 @@ public class Runner {
     Path path = Paths.get("java-phone-calls/calls.data");
     List<Record> records = Loader.loadRecordsFromFile(path);
 
-    Collections.sort(records, RecordComparator.decending(RecordComparator.getComparator(RecordComparator.CALLER_SORT, RecordComparator.RECEIVER_SORT)));
+    Collections.sort(records, RecordComparator.ascending(RecordComparator.getComparator(RecordComparator.CALLER_COMPARISON, RecordComparator.LENGTH_COMPARISON)));
     for (Record record : records)
       System.out.println(record);
   }
