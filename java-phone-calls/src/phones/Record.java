@@ -4,9 +4,9 @@ public class Record {
 
   public static Record generate() {
     return new Record() {{
-      caller = randInt(200);
-      receiver = randInt(200);
-      length = randInt(360);
+      value[0] = randInt(200);
+      value[1] = randInt(200);
+      value[2] = randInt(360);
     }};
   }
 
@@ -14,25 +14,25 @@ public class Record {
     return (int) (Math.random() * max);
   }
 
-  public int caller, receiver, length;
+  public final int value[] = new int[3];
 
   public String printRecord() {
-    return caller + " " + receiver + " " + length;
+    return value[0] + " " + value[1] + " " + value[2];
   }
 
-  public static Record parseRecord(String line) {
+  public static int[] parseRecord(String line) {
     final String[] values = line.split(" ");
-    return new Record() {{
-      caller = (Integer.parseInt(values[0]));
-      receiver = (Integer.parseInt(values[1]));
-      length = (Integer.parseInt(values[2]));
-    }};
+    return new int[] {
+      Integer.parseInt(values[0]),
+      Integer.parseInt(values[1]),
+      Integer.parseInt(values[2])
+    };
   }
 
   @Override
   public String toString() {
     return
-      "caller=" + caller + ", receiver=" + receiver + ", length=" + length;
+      "caller=" + value[0] + ", receiver=" + value[1] + ", length=" + value[2];
   }
 
 }

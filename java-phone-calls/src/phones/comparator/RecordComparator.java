@@ -9,21 +9,21 @@ public enum RecordComparator implements Comparator<Record> {
   CALLER_COMPARISON {
 
     public int compare(Record o1, Record o2) {
-      return o1.caller - (o2.caller);
+      return o1.value[0] - (o2.value[0]);
     }
 
   },
   RECEIVER_COMPARISON {
 
     public int compare(Record o1, Record o2) {
-      return o1.receiver - (o2.receiver);
+      return o1.value[1] - (o2.value[1]);
     }
 
   },
   LENGTH_COMPARISON {
 
     public int compare(Record o1, Record o2) {
-      return o1.receiver - (o2.receiver);
+      return o1.value[2] - (o2.value[2]);
     }
 
   };

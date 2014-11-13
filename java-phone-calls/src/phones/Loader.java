@@ -9,9 +9,9 @@ import java.util.List;
 
 public class Loader {
 
-  public static List<Record> loadRecordsFromFile(Path path) throws IOException {
+  public static List<int[]> loadRecordsFromFile(Path path) throws IOException {
     final List<String> lines = Files.readAllLines(path, Charset.defaultCharset());
-    return new ArrayList<Record>() {{
+    return new ArrayList<int[]>() {{
       for (String line : lines)
         add(Record.parseRecord(line));
     }};
