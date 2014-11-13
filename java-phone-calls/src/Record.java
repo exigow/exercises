@@ -2,38 +2,35 @@ public class Record {
 
   public static Record generate() {
     return new Record() {{
-      call = randInt(200);
-      rec = randInt(200);
-      length = randInt(360);
+      field[0] = randInt(200);
+      field[1] = randInt(200);
+      field[2] = randInt(360);
     }};
   }
 
   private static int randInt(int max) {
-    return (int)(Math.random() * max);
+    return (int) (Math.random() * max);
   }
 
-  int call, rec, length;
+  public int[] field = new int[3];
 
   public String printRecord() {
-    return call + " " + rec + " " + length;
+    return field[0] + " " + field[1] + " " + field[2];
   }
 
   public static Record parseRecord(String line) {
     final String[] values = line.split(" ");
     return new Record() {{
-      call = (Integer.parseInt(values[0]));
-      rec = (Integer.parseInt(values[1]));
-      length = (Integer.parseInt(values[2]));
+      field[0] = (Integer.parseInt(values[0]));
+      field[1] = (Integer.parseInt(values[1]));
+      field[2] = (Integer.parseInt(values[2]));
     }};
   }
 
   @Override
   public String toString() {
-    return "Record{" +
-      "call=" + call +
-      ", rec=" + rec +
-      ", length=" + length +
-      '}';
+    return
+      "caller=" + field[0] + ", receiver=" + field[1] + ", length=" + field[2];
   }
 
 }
