@@ -1,6 +1,6 @@
 package client;
 
-import transmission.SocketTransmissionIO;
+import transmission.SocketTransmission;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -17,8 +17,7 @@ public class Client {
 
   public void execute() throws IOException {
     Socket socket = new Socket(serverIpAddress, port);
-    SocketTransmissionIO transmission = new SocketTransmissionIO(socket);
-    transmission.send("hi! (from client)");
+    SocketTransmission transmission = new SocketTransmission(socket);
   }
 
 }

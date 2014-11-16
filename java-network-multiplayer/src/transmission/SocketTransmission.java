@@ -6,25 +6,22 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class SocketTransmissionIO {
+public class SocketTransmission {
 
   public BufferedReader in;
   public PrintWriter out;
 
-  public SocketTransmissionIO(Socket socket) {
+  public SocketTransmission(Socket socket) {
     try {
       in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       out = new PrintWriter(socket.getOutputStream(), true);
     } catch (IOException e) {
       e.printStackTrace();
-    } finally {
-      in = null;
-      out = null;
     }
   }
 
-  public void send(String str) {
-    out.print(str);
+  /*public void send(String str) {
+    out.println(str);
   }
 
   public String read() {
@@ -34,6 +31,6 @@ public class SocketTransmissionIO {
       e.printStackTrace();
     }
     return null;
-  }
+  }*/
 
 }

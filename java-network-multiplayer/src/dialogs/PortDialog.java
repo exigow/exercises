@@ -21,7 +21,7 @@ public class PortDialog extends InputDialog {
 
   @Override
   protected String defaultValue() {
-    return "16491";
+    return "9001";
   }
 
   @Override
