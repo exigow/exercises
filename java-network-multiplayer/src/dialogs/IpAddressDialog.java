@@ -6,10 +6,6 @@ import java.util.regex.Pattern;
 
 public class IpAddressDialog extends InputDialog {
 
-  public IpAddressDialog(Window parent) {
-    super(parent);
-  }
-
   @Override
   protected String message() {
     return "What is the server IP address?";

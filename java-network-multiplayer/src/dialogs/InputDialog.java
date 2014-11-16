@@ -3,20 +3,8 @@ package dialogs;
 import org.pmw.tinylog.Logger;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.WindowEvent;
 
 public abstract class InputDialog {
-
-  private final Window parent;
-
-  public InputDialog(Window parent) {
-    this.parent = parent;
-  }
-
-  private void close() {
-    parent.dispatchEvent(new WindowEvent(parent, WindowEvent.WINDOW_CLOSING));
-  }
 
   protected abstract String message();
 
@@ -37,7 +25,6 @@ public abstract class InputDialog {
     }
     Logger.error("validation failure: \"" + failure() + "\", source: \"" + str + "\"");
     JOptionPane.showMessageDialog(null, failure());
-    close();
     return null;
   }
 

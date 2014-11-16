@@ -4,10 +4,6 @@ import java.awt.*;
 
 public class PortDialog extends InputDialog {
 
-  public PortDialog(Window parent) {
-    super(parent);
-  }
-
   @Override
   protected String message() {
     return "What is the server port?";
