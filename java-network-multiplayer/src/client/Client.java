@@ -15,8 +15,6 @@ public class Client extends JFrame {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     String nick = new NickDialog(this).execute();
     String ip = new IpAddressDialog(this).execute();
-    System.out.println(nick);
-    System.out.println(ip);
   }
 
   public static void main(String[] args) {

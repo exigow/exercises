@@ -1,5 +1,7 @@
 package client.dialogs;
 
+import org.pmw.tinylog.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -29,8 +31,11 @@ public abstract class InputDialog {
   public String execute() {
     String str = (String)JOptionPane.showInputDialog(null, message(),
       title(), JOptionPane.QUESTION_MESSAGE, null, null, defaultValue());
-    if (validate(str))
+    if (validate(str)) {
+      Logger.info("validation success: \"" + str + "\"");
       return str;
+    }
+    Logger.error("validation failure: \"" + failure() + "\", source: \"" + str + "\"");
     JOptionPane.showMessageDialog(null, failure());
     close();
     return null;

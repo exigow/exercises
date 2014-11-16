@@ -12,17 +12,17 @@ public class IpAddressDialog extends InputDialog {
 
   @Override
   protected String message() {
-    return "What is the server ip address?";
+    return "What is the server IP address?";
   }
 
   @Override
   protected String title() {
-    return "Enter server ip";
+    return "Enter server IP";
   }
 
   @Override
   protected String failure() {
-    return "Wrong format!";
+    return "Wrong IP format!";
   }
 
   @Override
