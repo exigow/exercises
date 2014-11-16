@@ -30,7 +30,7 @@ public class Client extends JFrame {
     textField.addActionListener(new ActionListener() {
 
       public void actionPerformed(ActionEvent e) {
-        transmission.out.println(textField.getText());
+        transmission.sendMsg(textField.getText());
         textField.setText("");
       }
 
@@ -43,9 +43,9 @@ public class Client extends JFrame {
     Socket socket = new Socket(serverAddress, port);
     transmission = new SocketTransmission(socket);
     while (true) {
-      String line = transmission.in.readLine();
+      String line = transmission.readMsg();
       if (line.startsWith("SUBMITNAME")) {
-        transmission.out.println(name);
+        transmission.sendMsg(name);
       } else if (line.startsWith("NAMEACCEPTED")) {
         textField.setEditable(true);
       } else if (line.startsWith("MESSAGE")) {

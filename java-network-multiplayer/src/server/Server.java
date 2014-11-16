@@ -10,7 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
 
-public class Server extends JFrame {
+public class Server {
 
   private static final HashSet<String> names = new HashSet<String>();
   private static final HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
@@ -24,12 +24,6 @@ public class Server extends JFrame {
 
   public Server(int port) {
     this.port = port;
-    setTitle("server");
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    add(new JScrollPane(logger), BorderLayout.CENTER);
-    pack();
-    setLocationRelativeTo(null);
-    setVisible(true);
     logLine("creating window");
   }
 
@@ -63,8 +57,8 @@ public class Server extends JFrame {
       try {
         transmission = new SocketTransmission(socket);
         while (true) {
-          transmission.out.println("SUBMITNAME");
-          name = transmission.in.readLine();
+          transmission.sendMsg("SUBMITNAME");
+          name = transmission.readMsg();
           if (name == null)
             return;
           synchronized (names) {
@@ -74,17 +68,15 @@ public class Server extends JFrame {
             }
           }
         }
-        transmission.out.println("NAMEACCEPTED");
+        transmission.sendMsg("NAMEACCEPTED");
         writers.add(transmission.out);
         while (true) {
-          String input = transmission.in.readLine();
+          String input = transmission.readMsg();
           if (input == null)
             return;
           for (PrintWriter writer : writers)
             writer.println("MESSAGE " + name + ": " + input);
         }
-      } catch (IOException e) {
-        e.printStackTrace();
       } finally {
         if (name != null)
           names.remove(name);

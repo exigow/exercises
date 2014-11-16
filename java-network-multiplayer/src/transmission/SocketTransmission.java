@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class SocketTransmission {
 
-  public BufferedReader in;
+  private BufferedReader in;
   public PrintWriter out;
 
   public SocketTransmission(Socket socket) {
@@ -20,17 +20,20 @@ public class SocketTransmission {
     }
   }
 
-  /*public void send(String str) {
+  public void sendMsg(String str) {
+    System.out.println("SEND: " + str);
     out.println(str);
   }
 
-  public String read() {
+  public String readMsg() {
     try {
-      return in.readLine();
+      String read = in.readLine();
+      System.out.println("READ: " + read);
+      return read;
     } catch (IOException e) {
       e.printStackTrace();
     }
     return null;
-  }*/
+  }
 
 }
