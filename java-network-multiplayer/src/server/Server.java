@@ -36,6 +36,7 @@ public class Server extends JFrame {
     try {
       while (true) {
         Socket socket = listener.accept();
+        logLine("socket accepted: " + socket.toString());
         new Service(socket).start();
       }
     } finally {
