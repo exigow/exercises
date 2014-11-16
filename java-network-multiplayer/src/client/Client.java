@@ -1,39 +1,22 @@
 package client;
 
+import client.dialogs.IpAddressDialog;
+import client.dialogs.NickDialog;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 
 public class Client extends JFrame {
 
   public Client() {
-    setTitle("Simple example");
+    setTitle("Client");
     setSize(300, 200);
     setLocationRelativeTo(null);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    String nick = getNick();
-    if (nick == null)
-      close();
+    String nick = new NickDialog(this).execute();
+    String ip = new IpAddressDialog(this).execute();
     System.out.println(nick);
-  }
-
-  private String getNick() {
-    String nick = JOptionPane.showInputDialog(null,
-      "What is your nick?",
-      "Enter your nick",
-      JOptionPane.QUESTION_MESSAGE);
-    if (isBlank(nick))
-      return null;
-    return nick;
-  }
-
-  private boolean isBlank(String str) {
-    return str == null || str.isEmpty();
-  }
-
-  private void close() {
-    JOptionPane.showMessageDialog(this, "Nick is not specified. Closing client.");
-    dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    System.out.println(ip);
   }
 
   public static void main(String[] args) {
