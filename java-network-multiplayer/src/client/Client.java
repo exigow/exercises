@@ -1,7 +1,8 @@
 package client;
 
-import client.dialogs.IpAddressDialog;
-import client.dialogs.NickDialog;
+import dialogs.IpAddressDialog;
+import dialogs.NickDialog;
+import dialogs.PortDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,7 @@ public class Client extends JFrame {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     String nick = new NickDialog(this).execute();
     String ip = new IpAddressDialog(this).execute();
+    String port = new PortDialog(this).execute();
   }
 
   public static void main(String[] args) {

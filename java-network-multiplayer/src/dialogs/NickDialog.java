@@ -1,4 +1,4 @@
-package client.dialogs;
+package dialogs;
 
 import java.awt.*;
 
