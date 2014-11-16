@@ -1,20 +1,17 @@
 package transmission;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class SocketTransmission {
 
-  private BufferedReader in;
-  public PrintWriter out;
+  private DataInputStream in;
+  private DataOutputStream out;
 
   public SocketTransmission(Socket socket) {
     try {
-      in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      out = new PrintWriter(socket.getOutputStream(), true);
+      in = new DataInputStream(socket.getInputStream());
+      out = new DataOutputStream(socket.getOutputStream());
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -22,12 +19,16 @@ public class SocketTransmission {
 
   public void sendMsg(String str) {
     System.out.println("SEND: " + str);
-    out.println(str);
+    try {
+      out.writeUTF(str);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public String readMsg() {
     try {
-      String read = in.readLine();
+      String read = in.readUTF();
       System.out.println("READ: " + read);
       return read;
     } catch (IOException e) {
