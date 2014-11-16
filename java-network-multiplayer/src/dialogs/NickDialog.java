@@ -1,7 +1,5 @@
 package dialogs;
 
-import java.awt.*;
-
 public class NickDialog extends InputDialog {
 
   @Override
@@ -21,7 +19,7 @@ public class NickDialog extends InputDialog {
 
   @Override
   protected String defaultValue() {
-    return "skj";
+    return "nick_" + (int) (Math.random() * 128);
   }
 
   @Override

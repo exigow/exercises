@@ -1,7 +1,5 @@
 package dialogs;
 
-import java.awt.*;
-
 public class PortDialog extends InputDialog {
 
   @Override
