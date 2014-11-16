@@ -5,33 +5,32 @@ import java.net.Socket;
 
 public class SocketTransmission {
 
-  private DataInputStream in;
-  private DataOutputStream out;
+  private final Socket socket;
 
   public SocketTransmission(Socket socket) {
+    this.socket = socket;
+  }
+
+  public void send(Object str) {
+    System.out.println("SEND: " + str.toString());
     try {
-      in = new DataInputStream(socket.getInputStream());
-      out = new DataOutputStream(socket.getOutputStream());
+      ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+      out.writeObject(str);
+      out.flush();
+      out.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  public void sendMsg(String str) {
-    System.out.println("SEND: " + str);
+  public Object read() {
     try {
-      out.writeUTF(str);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public String readMsg() {
-    try {
-      String read = in.readUTF();
-      System.out.println("READ: " + read);
-      return read;
-    } catch (IOException e) {
+      ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+      Object obj = in.readObject();
+      System.out.println("READ: " + obj.toString());
+      in.close();
+      return obj;
+    } catch (Exception e) {
       e.printStackTrace();
     }
     return null;

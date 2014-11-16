@@ -19,7 +19,7 @@ public class Connector extends Thread {
   @Override
   public void run() {
     SocketTransmission transmission = new SocketTransmission(socket);
-    transmission.sendMsg("hello!");
+    transmission.send("hello!");
   }
 
   @Override

@@ -20,7 +20,7 @@ public class Client {
   public void run() throws IOException {
     Socket socket = new Socket(serverAddress, port);
     SocketTransmission transmission = new SocketTransmission(socket);
-    System.out.println(transmission.readMsg());
+    System.out.println(transmission.read());
   }
 
 }
