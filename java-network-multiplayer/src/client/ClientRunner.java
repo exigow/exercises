@@ -10,6 +10,8 @@ public class ClientRunner {
     String nick = new NickDialog().execute();
     String ip = new IpAddressDialog().execute();
     String port = new PortDialog().execute();
+    int portValue = Integer.parseInt(port);
+    new Client(nick, ip, portValue);
   }
 
 }

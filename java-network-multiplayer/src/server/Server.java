@@ -30,7 +30,7 @@ public class Server extends JFrame {
     logger.setCaretPosition(logger.getDocument().getLength());
   }
 
-  public Server execute() throws Exception {
+  public void execute() throws Exception {
     logLine("listening on port " + port);
     ServerSocket listener = new ServerSocket(port);
     try {
