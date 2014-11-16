@@ -52,7 +52,7 @@ public class Server extends JFrame {
   private static class Handler extends Thread {
 
     private String name;
-    private Socket socket;
+    private final Socket socket;
     private SocketTransmission transmission;
 
     public Handler(Socket socket) {
