@@ -17,15 +17,8 @@ public class ClassAnalyzer {
       sup = c.getSuperclass();
       constructors = c.getDeclaredConstructors();
       AccessibleObject.setAccessible(constructors, true);
+      interfaces = c.getInterfaces();
     }};
-  }
-
-  private static class NullProduct extends Product {
-
-    public String toString() {
-      return null;
-    }
-
   }
 
   private static class Product {
@@ -35,14 +28,24 @@ public class ClassAnalyzer {
     public Method[] methods;
     public Constructor[] constructors;
     public Class sup;
+    public Class[] interfaces;
 
     public String toString() {
       String r = name + "{\n";
       r += "fields=" + Arrays.toString(fields) + ";\n";
       r += "constructors=" + Arrays.toString(constructors) + ";\n";
       r += "methods=" + Arrays.toString(methods) + ";\n";
+      r += "interfaces=" + Arrays.toString(interfaces) + ";\n";
       r += "extends=" + ClassAnalyzer.analyze(sup) + "}\n";
       return r;
+    }
+
+  }
+
+  private static class NullProduct extends Product {
+
+    public String toString() {
+      return null;
     }
 
   }

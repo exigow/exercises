@@ -1,6 +1,8 @@
-package main;
+package main.testing;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
 
   private int age;
   public String name, lastName;

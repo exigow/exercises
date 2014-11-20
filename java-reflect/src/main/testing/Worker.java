@@ -1,8 +1,8 @@
-package main;
+package main.testing;
 
 import java.util.Date;
 
-public class Worker extends Person {
+public class Worker extends Person implements Workable {
 
   public Date employed;
   private int salary, money;
