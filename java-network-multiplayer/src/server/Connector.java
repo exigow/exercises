@@ -8,7 +8,7 @@ public class Connector extends Thread {
 
   private final Socket socket;
   private final Server server;
-  private boolean connected = false;
+  private String name;
 
   public Connector(Server server, Socket socket) {
     this.server = server;
@@ -18,13 +18,16 @@ public class Connector extends Thread {
 
   @Override
   public void run() {
-    SocketTransmission transmission = new SocketTransmission(socket);
-    transmission.send("hello!");
+    Object obj;
+    do {
+      SocketTransmission transmission = new SocketTransmission(socket);
+      obj = transmission.read();
+    } while (obj.equals("exit"));
   }
 
   @Override
   public String toString() {
-    return "listener -> " + socket.toString();
+    return "listener for \"" + name + "\", socket:" + socket.toString();
   }
 
 }

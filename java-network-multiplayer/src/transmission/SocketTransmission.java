@@ -11,13 +11,14 @@ public class SocketTransmission {
     this.socket = socket;
   }
 
-  public void send(Object str) {
+  public void send(final Object str) {
     System.out.println("SEND: " + str.toString());
     try {
-      ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-      out.writeObject(str);
-      out.flush();
-      out.close();
+      new ObjectOutputStream(socket.getOutputStream()) {{
+        writeObject(str);
+        flush();
+        close();
+      }};
     } catch (IOException e) {
       e.printStackTrace();
     }

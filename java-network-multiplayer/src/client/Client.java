@@ -20,7 +20,12 @@ public class Client {
   public void run() throws IOException {
     Socket socket = new Socket(serverAddress, port);
     SocketTransmission transmission = new SocketTransmission(socket);
-    System.out.println(transmission.read());
+    transmission.send(name);
+    Object obj;
+    do {
+      transmission = new SocketTransmission(socket);
+      obj = transmission.read();
+    } while (obj.equals("exit"));
   }
 
 }
