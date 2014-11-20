@@ -1,0 +1,8 @@
+1.4 Refleksja i adnotacje
+Zadanie 1.7   Napisz program (z intefejsem graficznym) który wczytuje nazwę dowolnej dostępnej klasy,
+ładuje ją i wyświetla (w czytelnej postaci) jej analizę: pola, metody (osobno odziedziczone i „własne”)
+z listą typów ich argumentów i modyfikatorami, implementowane interfejsy, klasy bazowe, konstruktory.
+Użytkownik powinien mieć możliwość wybrania dowolnego konstruktora i za jego pomocą utworzenia
+obiektu tej klasy; następnie powinno być możliwe wybranie dowolnej metody i jej wywołanie
+na rzecz utworzonego obiektu. Dla uproszczenia zakładamy, że zawsze wybierane będą konstruktory
+i metody z parametrami wyłącznie typu String, int lub double.
