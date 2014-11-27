@@ -1,0 +1,8 @@
+Napisz program (z intefejsem graficznym) który wyświetla kilka komponentów \graficznych (przyciski, pole tekstowe,
+etykiety,...). Korzystając z paska menu można wybrać opcję "zmień kolory". Otwierają się wtedy (dwa razy) okienka typu
+JColorChooser i użytkownik wybiera kolory czcionki i tła. Następnie zatwierdza zmianę klikając odpowiedni przycisk.
+Kolory we wszystkich komponentach zmieniają się wtedy na te wybrane, chyba, że kolory czcionki i tła są zbyt do siebie
+podobne (podobieństwo kolorów można mierzyć sumą kwadratów różnic składowych red, green i blue. Wtedy zmiana jest
+wetowana. Należy użyć ziaren Javy i odpowiednich słuczaczy (wetujących i niewetujących) zdarzeń polegających na
+modyfikacji pewnych pól ziarna. Słuchaczami niewetującymi mogą być obiekty klas
+dziedziczących z JButtton, JTextArea, itd.
