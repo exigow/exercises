@@ -9,11 +9,31 @@ struct Node {
 };
 
 inline void printNode(Node *node) {
-  printf("%c\n", node->value);
-  if (node->left)
-    printNode(node->left);
+  printf("%c %d\n", node->value, node->value);
+  /*if (node->left)
+    printNode(node->left);*/
   if(node->right)
     printNode(node->right);
+}
+
+inline void fix(Node *node) {
+  printf("fixing %d\n", node->value);
+  if (node->right == NULL && node->left != NULL) {
+    printf("moving single to right\n");
+    node->right = node->left;
+    node->left = NULL;
+    fix(node->right);
+  }
+  if (node->right != NULL && node->left != NULL) {
+    printf("compare %d > %d\n", node->left->value, node->right->value);
+    if (node->left->value > node->right->value) {
+      Node *c = node->left;
+      node->left = node->right;
+      node->right = c;
+      printf("swap %d with %d\n", node->left->value, node->right->value);
+    }
+    fix(node->right);
+  }
 }
 
 int main() {
@@ -33,10 +53,8 @@ int main() {
     walker = root;
     while (true) {
       c = getchar_unlocked();
-      if (c == EOF | c == 10) {
-        cout << endl;
+      if (c == EOF | c == 10)
         break;
-      }
       if (c == 'L') {
         if (walker->left == NULL)
           walker->left = new Node();
@@ -46,10 +64,12 @@ int main() {
           walker->right = new Node();
         walker = walker->right;
       }
-      cout << (char) c;
     }
     walker->value = value;
   } while (c != EOF);
+  printNode(root);
+  fix(root);
+  printf("\n");
   printNode(root);
   return 0;
 }
