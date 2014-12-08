@@ -8,22 +8,37 @@ struct Node {
   struct Node *right, *left;
 };
 
+
+inline void printMe(Node *node) {
+  if (node == NULL) {
+    printf("null");
+    return;
+  }
+  printf("%c <%d>", node->value, node->value);
+}
+
 inline void printNode(Node *node) {
-  printf("%c %d\n", node->value, node->value);
-  /*if (node->left)
-    printNode(node->left);*/
-  if(node->right)
+  // recur
+  if (node->left)
+    printNode(node->left);
+  if (node->right)
     printNode(node->right);
+  // printme
+  printMe(node);
+  printf("( ");
+  printMe(node->left);
+  printf(" : ");
+  printMe(node->right);
+  printf(" )\n");
 }
 
 inline void fix(Node *node) {
-  printf("fixing %d\n", node->value);
-  if (node->right == NULL && node->left != NULL) {
-    printf("moving single to right\n");
-    node->right = node->left;
-    node->left = NULL;
-    fix(node->right);
-  }
+  printf("\nfixing %d (with ", node->value);
+  if (node->left != NULL)
+    printf("%d ", node->left->value);
+  if (node->right != NULL)
+    printf("%d", node->right->value);
+  printf(")\n");
   if (node->right != NULL && node->left != NULL) {
     printf("compare %d > %d\n", node->left->value, node->right->value);
     if (node->left->value > node->right->value) {
@@ -32,8 +47,14 @@ inline void fix(Node *node) {
       node->right = c;
       printf("swap %d with %d\n", node->left->value, node->right->value);
     }
-    fix(node->right);
+    printf("run on %d\n", node->right->value);
   }
+  if (node->right == NULL && node->left != NULL) {
+    node->right = node->left;
+    node->left = NULL;
+  }
+  if (node->right != NULL)
+    fix(node->right);
 }
 
 int main() {
@@ -45,10 +66,11 @@ int main() {
     int value = getchar_unlocked();
     created->left = NULL;
     created->right = NULL;
-    if (rooting)
-      rooting = false,
-      root = created,
+    if (rooting) {
+      rooting = false;
+      root = created;
       root->value = value;
+    }
     getchar_unlocked(); // skip space
     walker = root;
     while (true) {
@@ -68,8 +90,10 @@ int main() {
     walker->value = value;
   } while (c != EOF);
   printNode(root);
+  printf("\n");
   fix(root);
   printf("\n");
   printNode(root);
+  printf("\n");
   return 0;
 }
