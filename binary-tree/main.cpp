@@ -9,7 +9,7 @@ struct Node {
 };
 
 inline void printNode(Node *node) {
-  printf("%d\n", node->value);
+  printf("%c\n", node->value);
   if (node->left)
     printNode(node->left);
   if(node->right)
@@ -31,7 +31,6 @@ int main() {
       root->value = value;
     getchar_unlocked(); // skip space
     walker = root;
-    cout << "walker starting from " << walker->value << endl;
     while (true) {
       c = getchar_unlocked();
       if (c == EOF | c == 10) {
