@@ -1,0 +1,222 @@
+ZADANIE
+
+Rozważmy niepuste drzewo binarne T etykietowane literami alfabetu angielskiego (tylko małe litery) i zapisane wierzchołkowo tak, że pozycję dowolnego wierzchołka x w drzewie T określa ciąg skierowań krawędzi (L - lewa krawędź, R - prawa krawędź) jakie pokonamy przechodząc w tym drzewie ścieżkę od korzenia do wierzchołka x.
+
+Wyznacz najstarsze leksykograficznie słowo, jakie można zbudować z etykiet wierzchołków rozważanego drzewa występujących na dowolnej ścieżce wierzchołek zewnętrzny (liść) drzewa T - korzeń drzewa T.
+
+
+
+WEJŚCIE
+
+Ciąg wierszy zakończony symbolem znaku końca pliku (EOF) reprezentujący poprawnie (zgodnie z powyższym opisem) pewne drzewo binarne T. Każdy pojedynczy wiersz zakończony znakiem nowej linii (kod ASCII 10) opisujący pozycję wierzchołka w drzewie T i zawierający:
+
+ - małą literę alfabetu angielskiego (kod ASCII od 97 do 122) - etykieta wierzchołka,
+
+ - znak odstępu  (kod ASCII 32),
+
+ - ciąg znaków L (kod ASCII 76) oraz R (kod ASCII 82) - ciąg skierowań krawędzi na ścieżce od korzenia drzewa do rozważanego wierzchołka.
+
+
+
+WYJŚCIE
+
+Wiersz zawierajacy ciąg znaków będący rozwiązaniem postawionego problemu.
+
+
+
+OGRANICZENIA
+
+Liczba wierzchołków drzewa T nie większa niż 10^7. Wysokość drzewa T ograniczona przez 2^6.
+
+
+
+LIMITY
+
+Złożoność czasowa O(n), złożoność pamięciowa O(n), gdzie n jest liczbą wierzchołków drzewa T.
+
+
+
+PRZYKŁAD 1
+
+wejście:
+
+a LL
+d
+a R
+s L
+
+wyjście:
+
+asd
+
+
+
+/*
+
+
+KOMENTARZ DO ROZWIĄZANIA
+
+
+
+
+
+Konstrukcja drzewa binarnego:
+
+
+
+
+
+    d
+
+
+   / \
+
+
+  s   a
+
+
+ /
+
+
+a
+
+
+
+
+
+Możliwe słowa na ścieżce liść drzewa – korzeń drzewa to asd i ad. Leksykograficznie mniejsze jest słowo asd.
+
+
+*/
+
+
+
+PRZYKŁAD 2
+
+wejście:
+
+s LR
+o LRR
+m RR
+p LRLRL
+k
+w LRL
+a LL
+t L
+h R
+j LRLR
+
+wyjście:
+
+pjwstk
+
+
+
+PRZYKŁAD 3
+
+wejście:
+
+w RLR
+
+
+t LLR
+
+
+m LLRR
+
+
+f LRLLL
+
+
+h LRR
+
+
+n L
+
+
+g LLL
+
+
+v RLL
+
+
+n RLLR
+
+
+r RLLRR
+
+
+k RLRR
+
+
+k LR
+
+
+i
+
+
+f LRLL
+
+
+z RLLL
+
+
+y RRLL
+
+
+i RRLLL
+
+
+v RRR
+
+
+z RRRL
+
+
+n LLLL
+
+
+w LLRRL
+
+
+r RR
+
+
+z R
+
+
+t RLLLL
+
+
+w RRLR
+
+
+s LRL
+
+
+f RLLRRR
+
+
+e RRRR
+
+
+j RLLLR
+
+
+u RRL
+
+
+v LL
+
+
+l RRRLL
+
+
+p LRLLR
+
+
+o RL
+
+wyjście:
+
+wurzi
