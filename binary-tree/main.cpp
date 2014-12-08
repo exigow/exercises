@@ -8,7 +8,6 @@ struct Node {
   struct Node *right, *left;
 };
 
-
 inline void printMe(Node *node) {
   if (node == NULL) {
     printf("null");
@@ -33,7 +32,8 @@ inline void printNode(Node *node) {
 }
 
 inline void fix(Node *node) {
-  printf("\nfixing %d (with ", node->value);
+  printf("fixing -->> ");
+  printMe(node);
   if (node->left != NULL)
     printf("%d ", node->left->value);
   if (node->right != NULL)
@@ -57,10 +57,11 @@ inline void fix(Node *node) {
     fix(node->right);
 }
 
-inline Node* createNode() {
+inline Node* createNode(int value) {
   Node *created = new Node();
   created->left = NULL;
   created->right = NULL;
+  created->value = value;
   return created;
 }
 
@@ -69,12 +70,11 @@ int main() {
   bool rooting = true;
   Node *root = NULL, *walker;
   do {
-    Node *created = createNode();
     int value = getchar_unlocked();
+    Node *created = createNode(value);
     if (rooting) {
       rooting = false;
       root = created;
-      root->value = value;
     }
     getchar_unlocked(); // skip space
     walker = root;
