@@ -14,7 +14,7 @@ inline void printMe(Node *node) {
     printf("null");
     return;
   }
-  printf("%c <%d>", node->value, node->value);
+  printf("%c [%d]", node->value, node->value);
 }
 
 inline void printNode(Node *node) {
@@ -25,11 +25,11 @@ inline void printNode(Node *node) {
     printNode(node->right);
   // printme
   printMe(node);
-  printf("( ");
+  printf(" (");
   printMe(node->left);
-  printf(" : ");
+  printf(" , ");
   printMe(node->right);
-  printf(" )\n");
+  printf(")\n");
 }
 
 inline void fix(Node *node) {
@@ -57,15 +57,20 @@ inline void fix(Node *node) {
     fix(node->right);
 }
 
+inline Node* createNode() {
+  Node *created = new Node();
+  created->left = NULL;
+  created->right = NULL;
+  return created;
+}
+
 int main() {
   int c;
   bool rooting = true;
   Node *root = NULL, *walker;
   do {
-    Node *created = new Node();
+    Node *created = createNode();
     int value = getchar_unlocked();
-    created->left = NULL;
-    created->right = NULL;
     if (rooting) {
       rooting = false;
       root = created;
