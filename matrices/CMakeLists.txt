@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8.4)
+project(matrices)
+set(SOURCE_FILES main.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/home/exigo/projects/exercises/matrices")
+add_executable(matrices ${SOURCE_FILES})
