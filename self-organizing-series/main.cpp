@@ -15,10 +15,10 @@ inline long next() {
 
 struct Node {
   long value;
-  Node *next;
+  Node* next;
 };
 
-static void printRecursive(Node *n) {
+static void printRecursive(Node* n) {
   if (n == nullptr)
     printf("null");
   else {
@@ -27,14 +27,13 @@ static void printRecursive(Node *n) {
   }
 }
 
-int main() {
-  long count = next();
-  Node *prev = nullptr;
-  Node *head = nullptr;
+inline static Node* loadAndGetHead() {
+  Node* prev = nullptr;
+  Node* head = nullptr;
   bool noBlock = true;
   long readedValue = next();
   do {
-    Node *node = new Node();
+    Node* node = new Node();
     node->value = readedValue;
     if (prev != nullptr)
       prev->next = node;
@@ -43,6 +42,15 @@ int main() {
     if (noBlock)
       head = node, noBlock = false;
   } while (readedValue != EOF);
+  return head;
+}
+
+int main() {
+  long count = next();
+  Node* head = loadAndGetHead();
   printRecursive(head);
+
+  //Node* pivot = head;
+
   return 0;
 }
