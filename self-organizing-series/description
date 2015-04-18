@@ -1,0 +1,65 @@
+ZADANIE
+Rozważmy dowolny indeksowany ciąg liczb naturalnych C, dla którego definiujemy pojęcie wskaźnika aktualnej pozycji POS. Dalej wprowadzamy dwie operacje na elementach tego ciągu:
+- R, usunięcie elementu c ciągu o indeksie POS+1, następnie przesunięcie wskaźnika POS o c elementów w prawo,
+- X, wstawienie tuż po (pozycja POS+1) elemencie c ciągu o indeksie POS elementu o wartości c-1, następnie przesunięcie wskaźnika POS o c elementów w prawo.
+ 
+Wyznacz postać ciągu wejściowego C po t-krotnym wykonaniu schematu operacji R i X tak, że jeżeli elementu ciągu o indeksie POS jest liczbą parzystą, to wykonaj operację R, w przeciwnym przypadku wykonaj operację X. Przyjmij początkowo, że wskaźnik POS wskazuje na pierwszy element ciągu wejściowego (jeżeli taki istnieje), oraz jeżeli zachodzi taka konieczność przesuwanie wskaźnika POS w prawo odbywa się w sposób cykliczny względem elementów ciągu C.
+ 
+WEJŚCIE
+Wiersz zawierający kolejno:
+ - liczbę definiująca krotność t powtórzeń schematu operacji R i X zakończoną znakiem odstępu (kod ASCII 32),
+ - elementy ciągu C oddzielone znakiem odstępu/spacji i zakończone znakiem końca pliku (EOF).
+ 
+WYJŚCIE
+Wiersz zawierający ciąg liczb naturalnych będący rozwiązaniem postawionego problemu wypisany, jeżeli zachodzi taka konieczność cyklicznie, począwszy od elementu ciągu wynikowego znajdującego się na pozycji wskazywanej przez wskaźnik POS w kierunku w prawo. Elementy ciągu wynikowego oddzielone znakiem odstępu.
+Uwaga! W przypadku, kiedy odpowiedzią jest ciąg pusty wypisz na wyjście liczbę -1.
+ 
+OGRANICZENIA
+Długość początkowa ciągu C zawarta w przedziale [0,10^7]. Liczba t powtórzeń schematu operacji R i X ograniczona przez 10^7. Zakres przesunięcia wskaźnika POS w prawo ograniczony w przedziale [0,10^9].
+ 
+LIMITY
+Złożoność czasowa O(tn), złożoność pamięciowa O(n), gdzie n jest długością początkową ciągu C, t krotnością powtórzeń schematu operacji R i X.
+ 
+PRZYKŁAD 1
+wejście:
+3 1 2 3
+wyjście:
+0 0 3 1
+ 
+/*
+
+KOMENTARZ DO ROZWIĄZANIA
+ 
+t=1: postać początkowa ciągu: 1 2 3
+     aktualna pozycja: POS->1
+     wykonana operacja: X, c=1
+     postać końcowa ciągu: 1 0 2 3
+     finalna pozycja: POS->0
+ 
+t=2: postać początkowa ciągu: 1 0 2 3
+     aktualna pozycja: POS->0
+     wykonana operacja: R, c=2
+     postać końcowa ciągu: 1 0 3
+     finalna pozycja: POS->1
+ 
+t=3: postać początkowa ciągu: 1 0 3
+     aktualna pozycja: POS->1
+     wykonana operacja: X, c=1
+     postać końcowa ciągu: 1 0 0 3
+     finalna pozycja: POS->0
+ 
+Rozwiązanie to ciąg (czytany od elementu na pozycji POS w kierunku w prawo) postaci: 0 0 3 1.
+
+*/
+ 
+PRZYKŁAD 2
+wejście:
+8 5 1 2 3
+wyjście:
+2 2
+ 
+PRZYKŁAD 3
+wejście:
+50 378 31 239 351 192 135 143 100 115 398 176 140 468 295 124 32 379 438 62 200 313 92 450 75 294 338 459 344 56 162 455 307 311 432 209 458 51 475 360 187 88 489 238 326 175 180 358 254 198 79
+wyjście:
+454 307 306 310 310 432 51 50 475 360 358 198 378 351 350 135 134 143 142 142 100 398 140 62 313 312 312 450 75 294 458 56
