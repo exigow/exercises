@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 project(self_organizing_series)
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/home/exigo/projects/exercises/self-organizing-series/")
 set(SOURCE_FILES main.cpp)
-add_executable(self_organizing_series ${SOURCE_FILES})
+add_executable(main ${SOURCE_FILES})

@@ -1,9 +1,14 @@
 ZADANIE
-Rozważmy dowolny indeksowany ciąg liczb naturalnych C, dla którego definiujemy pojęcie wskaźnika aktualnej pozycji POS. Dalej wprowadzamy dwie operacje na elementach tego ciągu:
+Rozważmy dowolny indeksowany ciąg liczb naturalnych C, dla którego definiujemy pojęcie wskaźnika aktualnej pozycji POS.
+Dalej wprowadzamy dwie operacje na elementach tego ciągu:
 - R, usunięcie elementu c ciągu o indeksie POS+1, następnie przesunięcie wskaźnika POS o c elementów w prawo,
-- X, wstawienie tuż po (pozycja POS+1) elemencie c ciągu o indeksie POS elementu o wartości c-1, następnie przesunięcie wskaźnika POS o c elementów w prawo.
+- X, wstawienie tuż po (pozycja POS+1) elemencie c ciągu o indeksie POS elementu o wartości c-1, następnie przesunięcie
+wskaźnika POS o c elementów w prawo.
  
-Wyznacz postać ciągu wejściowego C po t-krotnym wykonaniu schematu operacji R i X tak, że jeżeli elementu ciągu o indeksie POS jest liczbą parzystą, to wykonaj operację R, w przeciwnym przypadku wykonaj operację X. Przyjmij początkowo, że wskaźnik POS wskazuje na pierwszy element ciągu wejściowego (jeżeli taki istnieje), oraz jeżeli zachodzi taka konieczność przesuwanie wskaźnika POS w prawo odbywa się w sposób cykliczny względem elementów ciągu C.
+Wyznacz postać ciągu wejściowego C po t-krotnym wykonaniu schematu operacji R i X tak, że jeżeli elementu ciągu o
+indeksie POS jest liczbą parzystą, to wykonaj operację R, w przeciwnym przypadku wykonaj operację X. Przyjmij
+początkowo, że wskaźnik POS wskazuje na pierwszy element ciągu wejściowego (jeżeli taki istnieje), oraz jeżeli zachodzi
+taka konieczność przesuwanie wskaźnika POS w prawo odbywa się w sposób cykliczny względem elementów ciągu C.
  
 WEJŚCIE
 Wiersz zawierający kolejno:
@@ -11,14 +16,18 @@ Wiersz zawierający kolejno:
  - elementy ciągu C oddzielone znakiem odstępu/spacji i zakończone znakiem końca pliku (EOF).
  
 WYJŚCIE
-Wiersz zawierający ciąg liczb naturalnych będący rozwiązaniem postawionego problemu wypisany, jeżeli zachodzi taka konieczność cyklicznie, począwszy od elementu ciągu wynikowego znajdującego się na pozycji wskazywanej przez wskaźnik POS w kierunku w prawo. Elementy ciągu wynikowego oddzielone znakiem odstępu.
+Wiersz zawierający ciąg liczb naturalnych będący rozwiązaniem postawionego problemu wypisany, jeżeli zachodzi taka
+konieczność cyklicznie, począwszy od elementu ciągu wynikowego znajdującego się na pozycji wskazywanej przez wskaźnik
+POS w kierunku w prawo. Elementy ciągu wynikowego oddzielone znakiem odstępu.
 Uwaga! W przypadku, kiedy odpowiedzią jest ciąg pusty wypisz na wyjście liczbę -1.
  
 OGRANICZENIA
-Długość początkowa ciągu C zawarta w przedziale [0,10^7]. Liczba t powtórzeń schematu operacji R i X ograniczona przez 10^7. Zakres przesunięcia wskaźnika POS w prawo ograniczony w przedziale [0,10^9].
+Długość początkowa ciągu C zawarta w przedziale [0,10^7]. Liczba t powtórzeń schematu operacji R i X ograniczona przez
+10^7. Zakres przesunięcia wskaźnika POS w prawo ograniczony w przedziale [0,10^9].
  
 LIMITY
-Złożoność czasowa O(tn), złożoność pamięciowa O(n), gdzie n jest długością początkową ciągu C, t krotnością powtórzeń schematu operacji R i X.
+Złożoność czasowa O(tn), złożoność pamięciowa O(n), gdzie n jest długością początkową ciągu C, t krotnością powtórzeń
+schematu operacji R i X.
  
 PRZYKŁAD 1
 wejście:
