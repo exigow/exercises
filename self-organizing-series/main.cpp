@@ -19,16 +19,20 @@ struct Node {
   Node *next;
 };
 
-static void printRecursive(Node *n) {
-  if (n == NULL)
-    printf("null");
-  else {
-    printf("(%lu)->", n->value);
-    printRecursive(n->next);
-  }
+inline void printNode(Node *node) {
+  printf("%lu ", node->value);
 }
 
-inline static Node *loadAndGetHead() {
+inline void printIterative(Node *node) {
+  Node *temp = node;
+  Node *start = node;
+  do {
+    printNode(temp);
+    temp = temp->next;
+  } while (temp != start);
+}
+
+inline Node *loadAndGetHead() {
   Node *last = NULL;
   Node *head = NULL;
   bool noBlock = true;
@@ -47,16 +51,24 @@ inline static Node *loadAndGetHead() {
   return head;
 }
 
-inline static long removeNext(Node *node) {
+inline long removeNext(Node *node) {
   Node *forward = node->next->next;
   long val = node->next->value;
   delete node->next;
   node->next = forward;
-  printf("deleted, steps: %lu", val);
   return val;
 }
 
-inline static Node *walk(Node* from, long steps) {
+inline long addNext(Node *node) {
+  Node *temp = node->next;
+  Node *created = new Node();
+  created->value = node->value - 1;
+  node->next = created;
+  created->next = temp;
+  return node->value;
+}
+
+inline Node *walk(Node* from, long steps) {
   Node *temp = from;
   for (long i = 0; i < steps; i++)
     temp = temp->next;
@@ -64,12 +76,23 @@ inline static Node *walk(Node* from, long steps) {
   // todo skip jesli jest steps >= list.size
 }
 
+inline bool isEven(Node *node) {
+  return node->value % 2 == 0;
+}
+
+inline long hehe(Node *pivot) {
+  if (isEven(pivot))
+    return removeNext(pivot);
+  return addNext(pivot);
+}
+
 int main() {
   long count = next();
   Node *pivot = loadAndGetHead();
-  printRecursive(pivot);
-  /*long steps = removeNext(pivot);
-  pivot = walk(pivot, steps);
-  printRecursive(pivot);*/
+  for (int i = 0; i < count; i++) {
+    long steps = hehe(pivot);
+    pivot = walk(pivot, steps);
+  }
+  printIterative(pivot);
   return 0;
 }
