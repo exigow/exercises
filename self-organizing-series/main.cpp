@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ struct Node {
 };
 
 static void printRecursive(Node *n) {
-  if (n == nullptr)
+  if (n == NULL)
     printf("null");
   else {
     printf("(%lu)->", n->value);
@@ -28,33 +29,47 @@ static void printRecursive(Node *n) {
 }
 
 inline static Node *loadAndGetHead() {
-  Node *prev = nullptr;
-  Node *head = nullptr;
+  Node *last = NULL;
+  Node *head = NULL;
   bool noBlock = true;
   long readedValue = next();
   do {
     Node *node = new Node();
     node->value = readedValue;
-    if (prev != nullptr)
-      prev->next = node;
-    prev = node;
+    if (last != NULL)
+      last->next = node;
+    last = node;
     readedValue = next();
     if (noBlock)
       head = node, noBlock = false;
   } while (readedValue != EOF);
+  last->next = head;
   return head;
 }
 
-inline static void removeNext(Node *node) {
+inline static long removeNext(Node *node) {
   Node *forward = node->next->next;
+  long val = node->next->value;
   delete node->next;
   node->next = forward;
+  printf("deleted, steps: %lu", val);
+  return val;
+}
+
+inline static Node *walk(Node* from, long steps) {
+  Node *temp = from;
+  for (long i = 0; i < steps; i++)
+    temp = temp->next;
+  return temp;
+  // todo skip jesli jest steps >= list.size
 }
 
 int main() {
   long count = next();
   Node *pivot = loadAndGetHead();
-  removeNext(pivot);
   printRecursive(pivot);
+  /*long steps = removeNext(pivot);
+  pivot = walk(pivot, steps);
+  printRecursive(pivot);*/
   return 0;
 }
