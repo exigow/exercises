@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 2.8.4)
-project(binary_tree)
-set(SOURCE_FILES main.cpp)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/home/exigo/projects/exercises/binary-tree/")
-add_executable(binary_tree ${SOURCE_FILES})
