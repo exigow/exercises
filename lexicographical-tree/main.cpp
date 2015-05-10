@@ -1,27 +1,31 @@
 #include <iostream>
 
-using namespace std;
-
 struct Node {
   int letter;
   struct Node *right = NULL, *left = NULL;
 };
 
 inline static Node *walkLeft(Node *from) {
-  printf("walking left\n");
   if (from->left == NULL)
     from->left = new Node();
   return from->left;
 }
 
 inline static Node *walkRight(Node *from) {
-  printf("walking right\n");
   if (from->right == NULL)
     from->right = new Node();
   return from->right;
 }
 
-inline static Node *readTree() {
+inline static Node *walk(Node *walker, int option) {
+  if (option == 'L')
+    return walkLeft(walker);
+  if (option == 'R')
+    return walkRight(walker);
+  return walker;
+}
+
+inline static Node *buildTree() {
   Node *root = new Node();
   while (true) {
     int letter = getchar_unlocked();
@@ -31,10 +35,7 @@ inline static Node *readTree() {
     Node *walker = root;
     do {
       option = getchar_unlocked();
-      if (option == 'L')
-        walker = walkLeft(walker);
-      if (option == 'R')
-        walker = walkRight(walker);
+      walker = walk(walker, option);
     } while(option != '\n');
     walker->letter = letter;
   };
@@ -56,7 +57,7 @@ inline void printNode(Node *node) {
 }
 
 int main() {
-  Node *root = readTree();
+  Node *root = buildTree();
   printNode(root);
   return 0;
 }
