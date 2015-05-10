@@ -1,8 +1,9 @@
 #include <iostream>
+#include <stdio.h>
 
 struct Node {
   int letter;
-  struct Node *right = NULL, *left = NULL;
+  struct Node *right, *left;
 };
 
 inline static Node *walkLeft(Node *from) {
@@ -60,36 +61,41 @@ inline static bool isOnlyOneLeaf(Node *node) {
   return true;
 }
 
-struct Result {
-  int left = 0;
-  int right = 0;
-};
+inline static bool isNotHavingSubNodes(Node *node) {
+  return !node->left && !node->right;
+}
 
-inline static int reduce(Node *element) {
+inline static bool isLetter(int val) {
+  return val != 0 && val < 90;
+}
+
+static const int BORDER = 70;
+
+inline static int reduce(Node *node) {
   int tempLeft = 0;
   int tempRight = 0;
-  if (!element->left && !element->right)
-    return element->letter - 70;
+  if (isNotHavingSubNodes(node))
+    return node->letter - BORDER;
   else {
-    if (element->left)
-      tempLeft = reduce(element->left);
-    if (element->right)
-      tempRight = reduce(element->right);
+    if (node->left)
+      tempLeft = reduce(node->left);
+    if (node->right)
+      tempRight = reduce(node->right);
   }
-  if (tempLeft != 0 && tempLeft < 90) {
-    element->left = NULL;
-    tempLeft = tempLeft + 70;
+  if (isLetter(tempLeft)) {
+    node->left = NULL;
+    tempLeft = tempLeft + BORDER;
   }
-  if (tempRight != 0 && tempRight < 90) {
-    element->right = NULL;
-    tempRight = tempRight + 70;
+  if (isLetter(tempRight)) {
+    node->right = NULL;
+    tempRight = tempRight + BORDER;
   }
   if (tempLeft > tempRight) {
-    element->right = NULL;
+    node->right = NULL;
     return tempLeft;
   }
   if (tempLeft < tempRight) {
-    element->left = NULL;
+    node->left = NULL;
     return tempRight;
   }
   return tempRight;
