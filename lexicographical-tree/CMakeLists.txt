@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.1)
+project(lexicographical_tree)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(SOURCE_FILES main.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/home/exigo/projects/exercises/lexicographical-tree/")
+add_executable(lexicographical_tree ${SOURCE_FILES})

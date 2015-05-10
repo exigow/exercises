@@ -120,6 +120,9 @@ int main() {
       steps -= size;
     pivot = walk(pivot, steps);
   }
-  printIterative(pivot);
+  if (size == 0)
+    printf("-1");
+  else
+    printIterative(pivot);
   return 0;
 }
