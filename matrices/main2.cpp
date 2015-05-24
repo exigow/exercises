@@ -18,10 +18,7 @@ inline static void writeNumber(int &x) {
 }
 
 int main() {
-  int c;
-  int liczba = 0;
   int abstractionsCount;
-  int **summedAreaTable;
   int sumyElementowPodmacierzyDod[1000000];
   int sumyElementowPodmacierzyUje[1000000];
   int ileRoznychSum = 0;
@@ -34,61 +31,28 @@ int main() {
   int suma;
   int j = 0;
   writeNumber(size);
-  summedAreaTable = (int **) malloc(size * sizeof(int *));
-  for (i = 0; i < size; i++) {
-    summedAreaTable[i] = (int *) malloc(size * sizeof(int));
-  }
+  int tab[size][size];
   writeNumber(abstractionsCount);
   for (i = 0; i < size; i++) {
     for (j = 0; j < size; j++) {
-      writeNumber(summedAreaTable[i][j]);
+      writeNumber(tab[i][j]);
       if (i > 0)
-        summedAreaTable[i][j] += summedAreaTable[i - 1][j];
+        tab[i][j] += tab[i - 1][j];
       if (j > 0)
-        summedAreaTable[i][j] += summedAreaTable[i][j - 1];
+        tab[i][j] += tab[i][j - 1];
       if (i > 0 && j > 0)
-        summedAreaTable[i][j] -= summedAreaTable[i - 1][j - 1];
+        tab[i][j] -= tab[i - 1][j - 1];
     }
   }
-  c = getchar();
   for (i = 0; i < abstractionsCount; i++) {
-    liczba = 0;
-    while (c >= 48 && c <= 57) {
-      liczba *= 10;
-      liczba += (c - 48);
-      c = getchar();
-    }
-    k = liczba;
-    c = getchar();
-    liczba = 0;
-    while (c >= 48 && c <= 57) {
-      liczba *= 10;
-      liczba += (c - 48);
-      c = getchar();
-    }
-    l = liczba;
-    c = getchar();
-    liczba = 0;
-    while (c >= 48 && c <= 57) {
-      liczba *= 10;
-      liczba += (c - 48);
-      c = getchar();
-    }
-    m = liczba;
-    c = getchar();
-    liczba = 0;
-    while (c >= 48 && c <= 57) {
-      liczba *= 10;
-      liczba += (c - 48);
-      c = getchar();
-    }
-    n = liczba;
-    if (i < abstractionsCount - 1)
-      c = getchar();
-    suma = summedAreaTable[m][n];
-    if (l > 0) suma -= summedAreaTable[m][l - 1];
-    if (k > 0) suma -= summedAreaTable[k - 1][n];
-    if (k > 0 && l > 0) suma += summedAreaTable[k - 1][l - 1];
+    writeNumber(k);
+    writeNumber(l);
+    writeNumber(m);
+    writeNumber(n);
+    suma = tab[m][n];
+    if (l > 0) suma -= tab[m][l - 1];
+    if (k > 0) suma -= tab[k - 1][n];
+    if (k > 0 && l > 0) suma += tab[k - 1][l - 1];
     sumaSumEle += suma;
     if (suma >= 0) {
       if (sumyElementowPodmacierzyDod[suma] == 0) {
