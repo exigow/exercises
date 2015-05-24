@@ -26,15 +26,11 @@ int main() {
   int ileMaxPowtorzen = 0;
   int sumaSumEle = 0;
   int size;
-  int k, l, m, n;
-  int i = 0;
-  int suma;
-  int j = 0;
   writeNumber(size);
   int tab[size][size];
   writeNumber(abstractionsCount);
-  for (i = 0; i < size; i++) {
-    for (j = 0; j < size; j++) {
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
       writeNumber(tab[i][j]);
       if (i > 0)
         tab[i][j] += tab[i - 1][j];
@@ -44,15 +40,19 @@ int main() {
         tab[i][j] -= tab[i - 1][j - 1];
     }
   }
-  for (i = 0; i < abstractionsCount; i++) {
+  for (int i = 0; i < abstractionsCount; i++) {
+    int k, l, m, n;
     writeNumber(k);
     writeNumber(l);
     writeNumber(m);
     writeNumber(n);
-    suma = tab[m][n];
-    if (l > 0) suma -= tab[m][l - 1];
-    if (k > 0) suma -= tab[k - 1][n];
-    if (k > 0 && l > 0) suma += tab[k - 1][l - 1];
+    int suma = tab[m][n];
+    if (l > 0)
+      suma -= tab[m][l - 1];
+    if (k > 0)
+      suma -= tab[k - 1][n];
+    if (k > 0 && l > 0)
+      suma += tab[k - 1][l - 1];
     sumaSumEle += suma;
     if (suma >= 0) {
       if (sumyElementowPodmacierzyDod[suma] == 0) {
