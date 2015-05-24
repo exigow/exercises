@@ -28,16 +28,16 @@ int main() {
   int maxPowtorzen = 0;
   int ileMaxPowtorzen = 0;
   int sumaSumEle = 0;
-  int rozmiarMacierzy;
+  int size;
   int czyUjemna = -1;
   int k, l, m, n;
   int i = 0;
   int suma;
   int j = 0;
-  writeNumber(rozmiarMacierzy);
-  summedAreaTable = (int **) malloc(rozmiarMacierzy * sizeof(int *));
-  for (i = 0; i < rozmiarMacierzy; i++) {
-    summedAreaTable[i] = (int *) malloc(rozmiarMacierzy * sizeof(int));
+  writeNumber(size);
+  summedAreaTable = (int **) malloc(size * sizeof(int *));
+  for (i = 0; i < size; i++) {
+    summedAreaTable[i] = (int *) malloc(size * sizeof(int));
   }
   c = getchar();
   liczba = 0;
@@ -47,33 +47,19 @@ int main() {
     c = getchar();
   }
   ilePodmacierzy = liczba;
-  c = getchar();
-  for (i = 0; i < rozmiarMacierzy; i++) {
-    for (j = 0; j < rozmiarMacierzy; j++) {
-      liczba = 0;
-      while (c >= 48 && c <= 57 || c == 45) {
-        if (c == 45) {
-          czyUjemna = 1;
-          c = getchar();
-        }
-        liczba *= 10;
-        liczba += (c - 48);
-        c = getchar();
-      }
-      if (czyUjemna == 1) {
-        czyUjemna = -1;
-        liczba = -liczba;
-      }
-      summedAreaTable[i][j] = liczba;
+
+  for (i = 0; i < size; i++) {
+    for (j = 0; j < size; j++) {
+      writeNumber(summedAreaTable[i][j]);
       if (i > 0)
         summedAreaTable[i][j] += summedAreaTable[i - 1][j];
       if (j > 0)
         summedAreaTable[i][j] += summedAreaTable[i][j - 1];
       if (i > 0 && j > 0)
         summedAreaTable[i][j] -= summedAreaTable[i - 1][j - 1];
-      c = getchar();
     }
   }
+  c = getchar();
   for (i = 0; i < ilePodmacierzy; i++) {
     liczba = 0;
     while (c >= 48 && c <= 57) {
