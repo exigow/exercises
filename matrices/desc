@@ -60,7 +60,10 @@ SM5=(-2)+0+3=1
 SM6=(-2)
 SM7=3
 
-Stąd liczba klas abstrakcji względem rozważanej relacji jest równa 5 (różne wartości w/w sum to kolejno (-2), 1, 0, 3 oraz 4). Dalej, liczba klas abstrakcji o maksymalnym rozmiarze równa jest 3, są to klasy abstrakcji elementów (-2), 0 oraz 3. Ostatecznie średnia wartość sumy elementów rozważanych podmacierzy zredukowana do części całkowitoliczbowej to:
+Stąd liczba klas abstrakcji względem rozważanej relacji jest równa 5
+(różne wartości w/w sum to kolejno (-2), 1, 0, 3 oraz 4).
+Dalej, liczba klas abstrakcji o maksymalnym rozmiarze równa jest 3, są to klasy abstrakcji elementów (-2), 0 oraz 3.
+Ostatecznie średnia wartość sumy elementów rozważanych podmacierzy zredukowana do części całkowitoliczbowej to:
 
 (3+0+4+(-2)+0+1+(-2)+3)/8=7/8=0
 

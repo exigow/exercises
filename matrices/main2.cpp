@@ -17,7 +17,6 @@ inline static void writeNumber(int &x) {
     x = -x;
 }
 
-
 int main() {
   int c;
   int liczba = 0;
@@ -49,7 +48,6 @@ int main() {
   }
   ilePodmacierzy = liczba;
   c = getchar();
-  liczba = 0;
   for (i = 0; i < rozmiarMacierzy; i++) {
     for (j = 0; j < rozmiarMacierzy; j++) {
       liczba = 0;
@@ -73,17 +71,9 @@ int main() {
         summedAreaTable[i][j] += summedAreaTable[i][j - 1];
       if (i > 0 && j > 0)
         summedAreaTable[i][j] -= summedAreaTable[i - 1][j - 1];
-      printf("%ld ",liczba);
       c = getchar();
     }
-    printf("\n");
   }
-  printf("\n");
-  for(i=0;i<rozmiarMacierzy;i++){
-  for(j=0;j<rozmiarMacierzy;j++)
-  printf("%d ",summedAreaTable[i][j]);
-  printf("\n");}
-  printf("\n");
   for (i = 0; i < ilePodmacierzy; i++) {
     liczba = 0;
     while (c >= 48 && c <= 57) {
@@ -118,12 +108,10 @@ int main() {
     n = liczba;
     if (i < ilePodmacierzy - 1)
       c = getchar();
-    printf("%ld %ld %ld %ld \n",k,l,m,n);
     suma = summedAreaTable[m][n];
     if (l > 0) suma -= summedAreaTable[m][l - 1];
     if (k > 0) suma -= summedAreaTable[k - 1][n];
     if (k > 0 && l > 0) suma += summedAreaTable[k - 1][l - 1];
-    printf("%d \n",suma);
     sumaSumEle += suma;
     if (suma >= 0) {
       if (sumyElementowPodmacierzyDod[suma] == 0) {
@@ -167,6 +155,6 @@ int main() {
     }
   }
   sumaSumEle /= ilePodmacierzy;
-  printf("%d %d %lld", ileRoznychSum, ileMaxPowtorzen, sumaSumEle);
+  printf("%d %d %d", ileRoznychSum, ileMaxPowtorzen, sumaSumEle);
   return 0;
 }

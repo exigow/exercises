@@ -16,6 +16,26 @@ inline static void writeNumber(int &x) {
     x = -x;
 }
 
+struct Rect {
+  int ax;
+  int ay;
+  int bx;
+  int by;
+};
+
+inline static Rect* readRect() {
+  Rect* rect = new Rect();
+  writeNumber(rect->ay);
+  writeNumber(rect->ax);
+  writeNumber(rect->by);
+  writeNumber(rect->bx);
+  return rect;
+}
+
+inline static void printRect(Rect *rect) {
+  printf("[%d, %d] [%d, %d]\n", rect->ax, rect->ay, rect->bx, rect->by);
+}
+
 int main() {
   int abstractionsCount, size;
   writeNumber(size);
@@ -47,15 +67,34 @@ int main() {
       printf("%d ", tab[x][y]);
     printf("\n");
   }
-  // print abstract rectangles
-  printf("rectangles:\n");
+  // compute
+  int sumOverall = 0;
   for (int row = 0; row < abstractionsCount; row++) {
-    int startX, startY, endX, endY;
-    writeNumber(startX);
-    writeNumber(startY);
-    writeNumber(endX);
-    writeNumber(endY);
-    printf("%d %d %d %d \n", startX, startY, endX, endY);
+    Rect *rect = readRect();
+    printRect(rect);
+
+    int ayFixed = rect->ay - 1;
+    int axFixed = rect->ax - 1;
+
+    // upper
+    int upper = 0;
+    if (ayFixed >= 0)
+      upper = tab[rect->bx][ayFixed];
+    // left
+    int left = 0;
+    if (axFixed >= 0)
+      left = tab[axFixed][rect->by];
+
+    int big = tab[rect->bx][rect->by];
+
+    int small = tab[axFixed][ayFixed];
+    if (axFixed <= 0 || ayFixed <= 0)
+      small = 0;
+
+    int result = big - left - upper + small;
+    sumOverall += result;
+    printf("big(%d) - left(%d) - upper(%d) + small(%d) = %d\n", big, left, upper, small, result);
   }
+  printf("sumOverall = %d\n", sumOverall);
   return 0;
 }
