@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-inline static void writeNumber(int &x) {
 #define get getchar_unlocked
+inline static int read() {
   register int c = get();
-  x = 0;
+  int x = 0;
   bool negate = false;
   for (; ((c < '0' || c > '9') && c != '-'); c = get());
   if (c == '-') {
@@ -15,23 +15,36 @@ inline static void writeNumber(int &x) {
     x = (x << 1) + (x << 3) + c - 48;
   if (negate)
     x = -x;
+  return x;
+}
+
+struct Rect {
+  int ax, ay, bx, by;
+};
+
+inline static Rect readRect() {
+  Rect rect = {
+    .ax = read(),
+    .ay = read(),
+    .bx = read(),
+    .by = read()
+  };
+  return rect;
 }
 
 int main() {
-  int abstractionsCount;
   int sumyElementowPodmacierzyDod[1000000];
   int sumyElementowPodmacierzyUje[1000000];
   int ileRoznychSum = 0;
   int maxPowtorzen = 0;
   int ileMaxPowtorzen = 0;
-  int sumaSumEle = 0;
-  int size;
-  writeNumber(size);
+  int sumOverall = 0;
+  int size = read();
   int tab[size][size];
-  writeNumber(abstractionsCount);
+  int abstractionsCount = read();
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
-      writeNumber(tab[i][j]);
+      tab[i][j] = read();
       if (i > 0)
         tab[i][j] += tab[i - 1][j];
       if (j > 0)
@@ -41,40 +54,36 @@ int main() {
     }
   }
   for (int i = 0; i < abstractionsCount; i++) {
-    int k, l, m, n;
-    writeNumber(k);
-    writeNumber(l);
-    writeNumber(m);
-    writeNumber(n);
-    int suma = tab[m][n];
-    if (l > 0)
-      suma -= tab[m][l - 1];
-    if (k > 0)
-      suma -= tab[k - 1][n];
-    if (k > 0 && l > 0)
-      suma += tab[k - 1][l - 1];
-    sumaSumEle += suma;
-    if (suma >= 0) {
-      if (sumyElementowPodmacierzyDod[suma] == 0) {
-        sumyElementowPodmacierzyDod[suma] = 1;
+    Rect rect = readRect();
+    int result = tab[rect.bx][rect.by];
+    if (rect.ay > 0)
+      result -= tab[rect.bx][rect.ay - 1];
+    if (rect.ax > 0)
+      result -= tab[rect.ax - 1][rect.by];
+    if (rect.ax > 0 && rect.ay > 0)
+      result += tab[rect.ax - 1][rect.ay - 1];
+    sumOverall += result;
+    if (result >= 0) {
+      if (sumyElementowPodmacierzyDod[result] == 0) {
+        sumyElementowPodmacierzyDod[result] = 1;
         ileRoznychSum += 1;
-        if (maxPowtorzen < sumyElementowPodmacierzyDod[suma]) {
-          maxPowtorzen = sumyElementowPodmacierzyDod[suma];
+        if (maxPowtorzen < sumyElementowPodmacierzyDod[result]) {
+          maxPowtorzen = sumyElementowPodmacierzyDod[result];
           ileMaxPowtorzen = 1;
-        } else if (maxPowtorzen == sumyElementowPodmacierzyDod[suma]) {
+        } else if (maxPowtorzen == sumyElementowPodmacierzyDod[result]) {
           ileMaxPowtorzen += 1;
         }
       } else {
-        sumyElementowPodmacierzyDod[suma] += 1;
-        if (maxPowtorzen < sumyElementowPodmacierzyDod[suma]) {
-          maxPowtorzen = sumyElementowPodmacierzyDod[suma];
+        sumyElementowPodmacierzyDod[result] += 1;
+        if (maxPowtorzen < sumyElementowPodmacierzyDod[result]) {
+          maxPowtorzen = sumyElementowPodmacierzyDod[result];
           ileMaxPowtorzen = 1;
-        } else if (maxPowtorzen == sumyElementowPodmacierzyDod[suma]) {
+        } else if (maxPowtorzen == sumyElementowPodmacierzyDod[result]) {
           ileMaxPowtorzen += 1;
         }
       }
     } else {
-      int sumaUje = -suma;
+      int sumaUje = -result;
       if (sumyElementowPodmacierzyUje[sumaUje] == 0) {
         sumyElementowPodmacierzyUje[sumaUje] = 1;
         ileRoznychSum += 1;
@@ -95,7 +104,7 @@ int main() {
       }
     }
   }
-  sumaSumEle /= abstractionsCount;
-  printf("%d %d %d", ileRoznychSum, ileMaxPowtorzen, sumaSumEle);
+  sumOverall /= abstractionsCount;
+  printf("%d %d %d", ileRoznychSum, ileMaxPowtorzen, sumOverall);
   return 0;
 }
