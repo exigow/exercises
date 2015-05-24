@@ -41,11 +41,21 @@ int main() {
       tab[x][y] = val;
     }
   }
-  // test print
+  // print table
   for (int y = 0; y < size; y++) {
     for (int x = 0; x < size; x++)
       printf("%d ", tab[x][y]);
     printf("\n");
+  }
+  // print abstract rectangles
+  printf("rectangles:\n");
+  for (int row = 0; row < abstractionsCount; row++) {
+    int startX, startY, endX, endY;
+    writeNumber(startX);
+    writeNumber(startY);
+    writeNumber(endX);
+    writeNumber(endY);
+    printf("%d %d %d %d \n", startX, startY, endX, endY);
   }
   return 0;
 }
