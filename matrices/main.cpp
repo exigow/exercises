@@ -50,22 +50,22 @@ inline static Rect readRect() {
 }
 
 static const uint MAX_SIZE = 1000000;
-int plusTable[MAX_SIZE];
-int minusTable[MAX_SIZE];
-int average = 0;
+long int plusTable[MAX_SIZE];
+long int minusTable[MAX_SIZE];
+long long int average = 0;
 uint abstractionClasses = 0;
-uint AbstractionClassCountMax = 0;
-int countMax = 0;
+uint abstractionClassCountMax = 0;
+long int countMax = 0;
 
-inline static void increment(int result, int tab[]) {
+inline static void increment(long int result, long int tab[]) {
   if (countMax < tab[result]) {
     countMax = tab[result];
-    AbstractionClassCountMax = 1;
+    abstractionClassCountMax = 1;
   } else if (countMax == tab[result])
-    AbstractionClassCountMax += 1;
+    abstractionClassCountMax += 1;
 }
 
-inline static void pushResult(int result, int tab[]) {
+inline static void pushResult(long int result, long int tab[]) {
   if (tab[result] == 0) {
     tab[result] = 1;
     abstractionClasses += 1;
@@ -78,7 +78,7 @@ inline static void pushResult(int result, int tab[]) {
 
 int main() {
   uint size = readAbsolute();
-  int rectanglesCount = read();
+  long int rectanglesCount = read();
   // fill table
   int tab[size][size];
   tab[0][0] = read();
@@ -110,6 +110,6 @@ int main() {
     }
   }
   average /= rectanglesCount;
-  printf("%d %d %d", abstractionClasses, AbstractionClassCountMax, average);
-  return 0;
+  printf("%d %d %lld", abstractionClasses, abstractionClassCountMax, average);
+  return EXIT_SUCCESS;
 }
