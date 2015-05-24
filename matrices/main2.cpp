@@ -33,27 +33,30 @@ inline static Rect readRect() {
 }
 
 int main() {
-  int sumyElementowPodmacierzyDod[1000000];
-  int sumyElementowPodmacierzyUje[1000000];
-  int ileRoznychSum = 0;
-  int maxPowtorzen = 0;
-  int ileMaxPowtorzen = 0;
-  int sumOverall = 0;
   int size = read();
+  int rectanglesCount = read();
+
+  // initialize tab
   int tab[size][size];
-  int abstractionsCount = read();
-  for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) {
-      tab[i][j] = read();
-      if (i > 0)
-        tab[i][j] += tab[i - 1][j];
-      if (j > 0)
-        tab[i][j] += tab[i][j - 1];
-      if (i > 0 && j > 0)
-        tab[i][j] -= tab[i - 1][j - 1];
+  for (int x = 0; x < size; x++) {
+    for (int y = 0; y < size; y++) {
+      tab[x][y] = read();
+      if (x > 0)
+        tab[x][y] += tab[x - 1][y];
+      if (y > 0)
+        tab[x][y] += tab[x][y - 1];
+      if (x > 0 && y > 0)
+        tab[x][y] -= tab[x - 1][y - 1];
     }
   }
-  for (int i = 0; i < abstractionsCount; i++) {
+
+  int sumyElementowPodmacierzyDod[1000000];
+  int sumyElementowPodmacierzyUje[1000000];
+  int average = 0;
+  int abstractionClasses = 0;
+  int maxPowtorzen = 0;
+  int maxAbstractionClassCount = 0;
+  for (int i = 0; i < rectanglesCount; i++) {
     Rect rect = readRect();
     int result = tab[rect.bx][rect.by];
     if (rect.ay > 0)
@@ -62,49 +65,50 @@ int main() {
       result -= tab[rect.ax - 1][rect.by];
     if (rect.ax > 0 && rect.ay > 0)
       result += tab[rect.ax - 1][rect.ay - 1];
-    sumOverall += result;
+    printf("%d\n", result);
+    average += result;
     if (result >= 0) {
       if (sumyElementowPodmacierzyDod[result] == 0) {
         sumyElementowPodmacierzyDod[result] = 1;
-        ileRoznychSum += 1;
+        abstractionClasses += 1;
         if (maxPowtorzen < sumyElementowPodmacierzyDod[result]) {
           maxPowtorzen = sumyElementowPodmacierzyDod[result];
-          ileMaxPowtorzen = 1;
+          maxAbstractionClassCount = 1;
         } else if (maxPowtorzen == sumyElementowPodmacierzyDod[result]) {
-          ileMaxPowtorzen += 1;
+          maxAbstractionClassCount += 1;
         }
       } else {
         sumyElementowPodmacierzyDod[result] += 1;
         if (maxPowtorzen < sumyElementowPodmacierzyDod[result]) {
           maxPowtorzen = sumyElementowPodmacierzyDod[result];
-          ileMaxPowtorzen = 1;
+          maxAbstractionClassCount = 1;
         } else if (maxPowtorzen == sumyElementowPodmacierzyDod[result]) {
-          ileMaxPowtorzen += 1;
+          maxAbstractionClassCount += 1;
         }
       }
     } else {
       int sumaUje = -result;
       if (sumyElementowPodmacierzyUje[sumaUje] == 0) {
         sumyElementowPodmacierzyUje[sumaUje] = 1;
-        ileRoznychSum += 1;
+        abstractionClasses += 1;
         if (maxPowtorzen < sumyElementowPodmacierzyUje[sumaUje]) {
           maxPowtorzen = sumyElementowPodmacierzyUje[sumaUje];
-          ileMaxPowtorzen = 1;
+          maxAbstractionClassCount = 1;
         } else if (maxPowtorzen == sumyElementowPodmacierzyUje[sumaUje]) {
-          ileMaxPowtorzen += 1;
+          maxAbstractionClassCount += 1;
         }
       } else {
         sumyElementowPodmacierzyUje[sumaUje] += 1;
         if (maxPowtorzen < sumyElementowPodmacierzyUje[sumaUje]) {
           maxPowtorzen = sumyElementowPodmacierzyUje[sumaUje];
-          ileMaxPowtorzen = 1;
+          maxAbstractionClassCount = 1;
         } else if (maxPowtorzen == sumyElementowPodmacierzyUje[sumaUje]) {
-          ileMaxPowtorzen += 1;
+          maxAbstractionClassCount += 1;
         }
       }
     }
   }
-  sumOverall /= abstractionsCount;
-  printf("%d %d %d", ileRoznychSum, ileMaxPowtorzen, sumOverall);
+  average /= rectanglesCount;
+  printf("%d %d %d", abstractionClasses, maxAbstractionClassCount, average);
   return 0;
 }
