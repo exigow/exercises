@@ -41,10 +41,10 @@ struct Rect {
 
 inline static Rect readRect() {
   Rect rect = {
-    .ax = readAbsolute(),
-    .ay = readAbsolute(),
-    .bx = readAbsolute(),
-    .by = readAbsolute()
+    readAbsolute(),
+    readAbsolute(),
+    readAbsolute(),
+    readAbsolute()
   };
   return rect;
 }
@@ -90,12 +90,6 @@ int main() {
       if (y > 0)
         tab[x][y] += tab[x][y - 1] - tab[x - 1][y - 1];
     }
-  }
-  // print table
-  for (uint y = 0; y < size; y++) {
-    for (uint x = 0; x < size; x++)
-      printf("%d ", tab[x][y]);
-    printf("\n");
   }
   // compute
   for (uint i = 0; i < rectanglesCount; i++) {
