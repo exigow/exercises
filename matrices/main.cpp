@@ -1,100 +1,121 @@
+#include <stdlib.h>
 #include <stdio.h>
 
-inline static void writeNumber(int &x) {
-  #define get getchar_unlocked
+#define get getchar_unlocked
+
+inline static bool isNotNumber(int c) {
+  return c > '0' - 1 && c < '9' + 1;
+}
+
+inline static void buildNumber(int &number, int &character) {
+  while (isNotNumber(character)) {
+    number = (number << 1) + (number << 3) + character - '0';
+    character = get();
+  }
+}
+
+inline static int read() {
   register int c = get();
-  x = 0;
   bool negate = false;
-  for (; ((c < '0' || c > '9') && c != '-'); c = get());
   if (c == '-') {
     negate = true;
     c = get();
   }
-  for (; c > '0' - 1 && c < '9' + 1; c = get())
-    x = (x << 1) + (x << 3) + c - 48;
+  register int n = 0;
+  buildNumber(n, c);
   if (negate)
-    x = -x;
+    return -n;
+  return n;
+}
+
+inline static uint readAbsolute() {
+  register int n = 0;
+  register int c = get();
+  buildNumber(n, c);
+  return (uint) n;
 }
 
 struct Rect {
-  int ax;
-  int ay;
-  int bx;
-  int by;
+  uint ax, ay, bx, by;
 };
 
-inline static Rect* readRect() {
-  Rect* rect = new Rect();
-  writeNumber(rect->ay);
-  writeNumber(rect->ax);
-  writeNumber(rect->by);
-  writeNumber(rect->bx);
+inline static Rect readRect() {
+  Rect rect = {
+    .ax = readAbsolute(),
+    .ay = readAbsolute(),
+    .bx = readAbsolute(),
+    .by = readAbsolute()
+  };
   return rect;
 }
 
-inline static void printRect(Rect *rect) {
-  printf("[%d, %d] [%d, %d]\n", rect->ax, rect->ay, rect->bx, rect->by);
+static const uint MAX_SIZE = 1000000;
+int plusTable[MAX_SIZE];
+int minusTable[MAX_SIZE];
+int average = 0;
+uint abstractionClasses = 0;
+uint AbstractionClassCountMax = 0;
+int countMax = 0;
+
+inline static void increment(int result, int tab[]) {
+  if (countMax < tab[result]) {
+    countMax = tab[result];
+    AbstractionClassCountMax = 1;
+  } else if (countMax == tab[result])
+    AbstractionClassCountMax += 1;
+}
+
+inline static void pushResult(int result, int tab[]) {
+  if (tab[result] == 0) {
+    tab[result] = 1;
+    abstractionClasses += 1;
+    increment(result, tab);
+  } else {
+    tab[result] += 1;
+    increment(result, tab);
+  }
 }
 
 int main() {
-  int abstractionsCount, size;
-  writeNumber(size);
-  writeNumber(abstractionsCount);
+  uint size = readAbsolute();
+  int rectanglesCount = read();
+  // fill table
   int tab[size][size];
-  // corner value
-  writeNumber(tab[0][0]);
-  // first row
-  for (int x = 1; x < size; x++) {
-    writeNumber(tab[x][0]);
-    tab[x][0] += tab[x - 1][0];
-  }
-  // rest
-  for (int y = 1; y < size; y++) {
-    writeNumber(tab[0][y]);
-    tab[0][y] += tab[0][y - 1];
-    for (int x = 1; x < size; x++) {
-      int val;
-      writeNumber(val);
-      val += tab[x - 1][y];
-      val += tab[x][y - 1];
-      val -= tab[x - 1][y - 1];
-      tab[x][y] = val;
+  tab[0][0] = read();
+  for (uint y = 1; y < size; y++)
+    tab[0][y] = read() + tab[0][y - 1];
+  for (uint x = 1; x < size; x++) {
+    for (uint y = 0; y < size; y++) {
+      tab[x][y] = read() + tab[x - 1][y];
+      if (y > 0)
+        tab[x][y] += tab[x][y - 1] - tab[x - 1][y - 1];
     }
   }
   // print table
-  for (int y = 0; y < size; y++) {
-    for (int x = 0; x < size; x++)
+  for (uint y = 0; y < size; y++) {
+    for (uint x = 0; x < size; x++)
       printf("%d ", tab[x][y]);
     printf("\n");
   }
   // compute
-  int sumOverall = 0;
-  for (int row = 0; row < abstractionsCount; row++) {
-    Rect *rect = readRect();
-    printRect(rect);
-
-    int ayFixed = rect->ay - 1;
-    int axFixed = rect->ax - 1;
-
-    // upper
-    int upper = 0;
-    if (ayFixed >= 0)
-      upper = tab[rect->bx][ayFixed];
-    // left
-    int left = 0;
-    if (axFixed >= 0)
-      left = tab[axFixed][rect->by];
-
-    int big = tab[rect->bx][rect->by];
-
-    int small = tab[axFixed][ayFixed];
-    if (axFixed <= 0 || ayFixed <= 0)
-      small = 0;
-
-    int result = big - left - upper + small;
-    sumOverall += result;
-    printf("big(%d) - left(%d) - upper(%d) + small(%d) = %d\n", big, left, upper, small, result);
+  for (uint i = 0; i < rectanglesCount; i++) {
+    Rect rect = readRect();
+    int result = tab[rect.bx][rect.by];
+    if (rect.ay > 0)
+      result -= tab[rect.bx][rect.ay - 1];
+    if (rect.ax > 0)
+      result -= tab[rect.ax - 1][rect.by];
+    if (rect.ax > 0 && rect.ay > 0)
+      result += tab[rect.ax - 1][rect.ay - 1];
+    average += result;
+    if (result >= 0) {
+      pushResult(result, plusTable);
+    } else {
+      result = -result;
+      pushResult(result, minusTable);
+    }
   }
-  printf("sumOverall = %d\n", sumOverall);
+  average /= rectanglesCount;
+  printf("%d %d %d", abstractionClasses, AbstractionClassCountMax, average);
   return 0;
 }
