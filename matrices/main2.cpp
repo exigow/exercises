@@ -2,32 +2,49 @@
 #include <stdlib.h>
 
 #define get getchar_unlocked
+
+inline static bool isNotNumber(int c) {
+  return c > '0' - 1 && c < '9' + 1;
+}
+
+inline static void buildNumber(int &number, int &character) {
+  while (isNotNumber(character)) {
+    number = (number << 1) + (number << 3) + character - '0';
+    character = get();
+  }
+}
+
 inline static int read() {
   register int c = get();
-  int x = 0;
   bool negate = false;
-  for (; ((c < '0' || c > '9') && c != '-'); c = get());
   if (c == '-') {
     negate = true;
     c = get();
   }
-  for (; c > '0' - 1 && c < '9' + 1; c = get())
-    x = (x << 1) + (x << 3) + c - 48;
+  register int n = 0;
+  buildNumber(n, c);
   if (negate)
-    x = -x;
-  return x;
+    return -n;
+  return n;
+}
+
+inline static uint readAbsolute() {
+  register int n = 0;
+  register int c = get();
+  buildNumber(n, c);
+  return (uint) n;
 }
 
 struct Rect {
-  int ax, ay, bx, by;
+  uint ax, ay, bx, by;
 };
 
 inline static Rect readRect() {
   Rect rect = {
-    .ax = read(),
-    .ay = read(),
-    .bx = read(),
-    .by = read()
+    .ax = readAbsolute(),
+    .ay = readAbsolute(),
+    .bx = readAbsolute(),
+    .by = readAbsolute()
   };
   return rect;
 }
@@ -60,7 +77,7 @@ inline static void pushResult(int result, int tab[]) {
 }
 
 int main() {
-  uint size = (uint) read();
+  uint size = readAbsolute();
   int rectanglesCount = read();
   // fill table
   int tab[size][size];
