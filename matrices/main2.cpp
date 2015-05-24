@@ -32,14 +32,14 @@ inline static Rect readRect() {
   return rect;
 }
 
-static const int MAX_SIZE = 1000000;
+static const uint MAX_SIZE = 1000000;
 int plusTable[MAX_SIZE];
 int minusTable[MAX_SIZE];
 int average = 0;
-int abstractionClasses = 0;
-int AbstractionClassCountMax = 0;
-
+uint abstractionClasses = 0;
+uint AbstractionClassCountMax = 0;
 int countMax = 0;
+
 inline static void increment(int result, int tab[]) {
   if (countMax < tab[result]) {
     countMax = tab[result];
@@ -60,28 +60,28 @@ inline static void pushResult(int result, int tab[]) {
 }
 
 int main() {
-  int size = read();
+  uint size = (uint) read();
   int rectanglesCount = read();
   // fill table
   int tab[size][size];
   tab[0][0] = read();
-  for (int y = 1; y < size; y++)
+  for (uint y = 1; y < size; y++)
     tab[0][y] = read() + tab[0][y - 1];
-  for (int x = 1; x < size; x++) {
-    for (int y = 0; y < size; y++) {
+  for (uint x = 1; x < size; x++) {
+    for (uint y = 0; y < size; y++) {
       tab[x][y] = read() + tab[x - 1][y];
       if (y > 0)
         tab[x][y] += tab[x][y - 1] - tab[x - 1][y - 1];
     }
   }
   // print table
-  for (int y = 0; y < size; y++) {
-    for (int x = 0; x < size; x++)
+  for (uint y = 0; y < size; y++) {
+    for (uint x = 0; x < size; x++)
       printf("%d ", tab[x][y]);
     printf("\n");
   }
   // compute
-  for (int i = 0; i < rectanglesCount; i++) {
+  for (uint i = 0; i < rectanglesCount; i++) {
     Rect rect = readRect();
     int result = tab[rect.bx][rect.by];
     if (rect.ay > 0)
