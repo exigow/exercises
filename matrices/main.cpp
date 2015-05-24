@@ -50,14 +50,14 @@ inline static Rect readRect() {
 }
 
 static const uint MAX_SIZE = 1000000;
-long int plusTable[MAX_SIZE];
-long int minusTable[MAX_SIZE];
+int plusTable[MAX_SIZE];
+int minusTable[MAX_SIZE];
 long long int average = 0;
 uint abstractionClasses = 0;
 uint abstractionClassCountMax = 0;
 long int countMax = 0;
 
-inline static void increment(long int result, long int tab[]) {
+inline static void increment(long int result, int tab[]) {
   if (countMax < tab[result]) {
     countMax = tab[result];
     abstractionClassCountMax = 1;
@@ -65,7 +65,7 @@ inline static void increment(long int result, long int tab[]) {
     abstractionClassCountMax += 1;
 }
 
-inline static void pushResult(long int result, long int tab[]) {
+inline static void pushResult(long int result, int tab[]) {
   if (tab[result] == 0) {
     tab[result] = 1;
     abstractionClasses += 1;
