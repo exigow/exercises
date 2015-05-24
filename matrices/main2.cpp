@@ -20,7 +20,7 @@ inline static void writeNumber(int &x) {
 int main() {
   int c;
   int liczba = 0;
-  int ilePodmacierzy;
+  int abstractionsCount;
   int **summedAreaTable;
   int sumyElementowPodmacierzyDod[1000000];
   int sumyElementowPodmacierzyUje[1000000];
@@ -29,7 +29,6 @@ int main() {
   int ileMaxPowtorzen = 0;
   int sumaSumEle = 0;
   int size;
-  int czyUjemna = -1;
   int k, l, m, n;
   int i = 0;
   int suma;
@@ -39,15 +38,7 @@ int main() {
   for (i = 0; i < size; i++) {
     summedAreaTable[i] = (int *) malloc(size * sizeof(int));
   }
-  c = getchar();
-  liczba = 0;
-  while (c >= 48 && c <= 57) {
-    liczba *= 10;
-    liczba += (c - 48);
-    c = getchar();
-  }
-  ilePodmacierzy = liczba;
-
+  writeNumber(abstractionsCount);
   for (i = 0; i < size; i++) {
     for (j = 0; j < size; j++) {
       writeNumber(summedAreaTable[i][j]);
@@ -60,7 +51,7 @@ int main() {
     }
   }
   c = getchar();
-  for (i = 0; i < ilePodmacierzy; i++) {
+  for (i = 0; i < abstractionsCount; i++) {
     liczba = 0;
     while (c >= 48 && c <= 57) {
       liczba *= 10;
@@ -92,7 +83,7 @@ int main() {
       c = getchar();
     }
     n = liczba;
-    if (i < ilePodmacierzy - 1)
+    if (i < abstractionsCount - 1)
       c = getchar();
     suma = summedAreaTable[m][n];
     if (l > 0) suma -= summedAreaTable[m][l - 1];
@@ -140,7 +131,7 @@ int main() {
       }
     }
   }
-  sumaSumEle /= ilePodmacierzy;
+  sumaSumEle /= abstractionsCount;
   printf("%d %d %d", ileRoznychSum, ileMaxPowtorzen, sumaSumEle);
   return 0;
 }
