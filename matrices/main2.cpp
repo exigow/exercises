@@ -32,30 +32,55 @@ inline static Rect readRect() {
   return rect;
 }
 
+static const int MAX_SIZE = 1000000;
+int plusTable[MAX_SIZE];
+int minusTable[MAX_SIZE];
+int average = 0;
+int abstractionClasses = 0;
+int AbstractionClassCountMax = 0;
+
+int countMax = 0;
+inline static void increment(int result, int tab[]) {
+  if (countMax < tab[result]) {
+    countMax = tab[result];
+    AbstractionClassCountMax = 1;
+  } else if (countMax == tab[result])
+    AbstractionClassCountMax += 1;
+}
+
+inline static void pushResult(int result, int tab[]) {
+  if (tab[result] == 0) {
+    tab[result] = 1;
+    abstractionClasses += 1;
+    increment(result, tab);
+  } else {
+    tab[result] += 1;
+    increment(result, tab);
+  }
+}
+
 int main() {
   int size = read();
   int rectanglesCount = read();
-
-  // initialize tab
+  // fill table
   int tab[size][size];
-  for (int x = 0; x < size; x++) {
+  tab[0][0] = read();
+  for (int y = 1; y < size; y++)
+    tab[0][y] = read() + tab[0][y - 1];
+  for (int x = 1; x < size; x++) {
     for (int y = 0; y < size; y++) {
-      tab[x][y] = read();
-      if (x > 0)
-        tab[x][y] += tab[x - 1][y];
+      tab[x][y] = read() + tab[x - 1][y];
       if (y > 0)
-        tab[x][y] += tab[x][y - 1];
-      if (x > 0 && y > 0)
-        tab[x][y] -= tab[x - 1][y - 1];
+        tab[x][y] += tab[x][y - 1] - tab[x - 1][y - 1];
     }
   }
-
-  int sumyElementowPodmacierzyDod[1000000];
-  int sumyElementowPodmacierzyUje[1000000];
-  int average = 0;
-  int abstractionClasses = 0;
-  int maxPowtorzen = 0;
-  int maxAbstractionClassCount = 0;
+  // print table
+  for (int y = 0; y < size; y++) {
+    for (int x = 0; x < size; x++)
+      printf("%d ", tab[x][y]);
+    printf("\n");
+  }
+  // compute
   for (int i = 0; i < rectanglesCount; i++) {
     Rect rect = readRect();
     int result = tab[rect.bx][rect.by];
@@ -65,50 +90,15 @@ int main() {
       result -= tab[rect.ax - 1][rect.by];
     if (rect.ax > 0 && rect.ay > 0)
       result += tab[rect.ax - 1][rect.ay - 1];
-    printf("%d\n", result);
     average += result;
     if (result >= 0) {
-      if (sumyElementowPodmacierzyDod[result] == 0) {
-        sumyElementowPodmacierzyDod[result] = 1;
-        abstractionClasses += 1;
-        if (maxPowtorzen < sumyElementowPodmacierzyDod[result]) {
-          maxPowtorzen = sumyElementowPodmacierzyDod[result];
-          maxAbstractionClassCount = 1;
-        } else if (maxPowtorzen == sumyElementowPodmacierzyDod[result]) {
-          maxAbstractionClassCount += 1;
-        }
-      } else {
-        sumyElementowPodmacierzyDod[result] += 1;
-        if (maxPowtorzen < sumyElementowPodmacierzyDod[result]) {
-          maxPowtorzen = sumyElementowPodmacierzyDod[result];
-          maxAbstractionClassCount = 1;
-        } else if (maxPowtorzen == sumyElementowPodmacierzyDod[result]) {
-          maxAbstractionClassCount += 1;
-        }
-      }
+      pushResult(result, plusTable);
     } else {
-      int sumaUje = -result;
-      if (sumyElementowPodmacierzyUje[sumaUje] == 0) {
-        sumyElementowPodmacierzyUje[sumaUje] = 1;
-        abstractionClasses += 1;
-        if (maxPowtorzen < sumyElementowPodmacierzyUje[sumaUje]) {
-          maxPowtorzen = sumyElementowPodmacierzyUje[sumaUje];
-          maxAbstractionClassCount = 1;
-        } else if (maxPowtorzen == sumyElementowPodmacierzyUje[sumaUje]) {
-          maxAbstractionClassCount += 1;
-        }
-      } else {
-        sumyElementowPodmacierzyUje[sumaUje] += 1;
-        if (maxPowtorzen < sumyElementowPodmacierzyUje[sumaUje]) {
-          maxPowtorzen = sumyElementowPodmacierzyUje[sumaUje];
-          maxAbstractionClassCount = 1;
-        } else if (maxPowtorzen == sumyElementowPodmacierzyUje[sumaUje]) {
-          maxAbstractionClassCount += 1;
-        }
-      }
+      result = -result;
+      pushResult(result, minusTable);
     }
   }
   average /= rectanglesCount;
-  printf("%d %d %d", abstractionClasses, maxAbstractionClassCount, average);
+  printf("%d %d %d", abstractionClasses, AbstractionClassCountMax, average);
   return 0;
 }
